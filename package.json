@@ -4,7 +4,9 @@
   "description": "The back end service for ShelfShare",
   "main": "./server/index.js",
   "scripts": {
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "server-dev": "npx nodemon --watch server server/index.js",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
