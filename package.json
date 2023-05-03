@@ -1,0 +1,19 @@
+{
+  "name": "shelfshare-back-end",
+  "version": "1.0.0",
+  "description": "The back end service for ShelfShare",
+  "main": "./server/index.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp2209-boc-basementeels/ShelfShare-Back-End.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp2209-boc-basementeels/ShelfShare-Back-End/issues"
+  },
+  "homepage": "https://github.com/rpp2209-boc-basementeels/ShelfShare-Back-End#readme"
+}
