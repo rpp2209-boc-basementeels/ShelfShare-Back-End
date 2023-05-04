@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../../db');
 // imports the express promise router to use instead of default express router
 const Router = require('express-promise-router');
 
@@ -7,7 +7,7 @@ const router = new Router();
 
 // define endpoints
 
-// example
+// EXAMPLE BELOW
 
 // router.get('/:id', async (req, res) => {
 //   const { id } = req.params;
