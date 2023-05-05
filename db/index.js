@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // adds the pooling functionality from node-postgres
 const { Pool } = require('pg');
 
