@@ -8,7 +8,7 @@ const db = require('./index.js');
 const rebuildDatabase = async () => {
   // drop all tables on the current database
   try {
-    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, users`, []);
+    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors, users`, []);
   } catch (err) {
     console.log('ERROR DROPPING EXISTING TABLES');
   }
@@ -23,10 +23,21 @@ const rebuildDatabase = async () => {
       title text NOT NULL,
       genre text NOT NULL,
       pub_date date NOT NULL,
-      ISBN text NOT NULL,
+      ISBN integer NOT NULL,
       image_url text NOT NULL)`, []);
   } catch (err) {
     console.log('ERROR CREATING books TABLE', err);
+  }
+
+  // AUTHORS (necessitated by books with multiple authors)
+  try {
+    await db.query(`CREATE TABLE authors(
+      author_id serial PRIMARY KEY,
+      author text NOT NULL,
+      ISBN integer REFERENCES books
+    )`, []);
+  } catch (err) {
+    console.log('ERROR CREATING authors TABLE', err);
   }
 
   // USERS
