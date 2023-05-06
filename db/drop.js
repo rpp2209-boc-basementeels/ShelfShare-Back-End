@@ -23,7 +23,7 @@ const rebuildDatabase = async () => {
       title text NOT NULL,
       genre text NOT NULL,
       pub_date date NOT NULL,
-      ISBN integer NOT NULL,
+      ISBN bigint NOT NULL,
       image_url text NOT NULL)`, []);
   } catch (err) {
     console.log('ERROR CREATING books TABLE', err);
@@ -34,7 +34,7 @@ const rebuildDatabase = async () => {
     await db.query(`CREATE TABLE authors(
       author_id serial PRIMARY KEY,
       author text NOT NULL,
-      ISBN integer REFERENCES books
+      ISBN bigint REFERENCES books
     )`, []);
   } catch (err) {
     console.log('ERROR CREATING authors TABLE', err);
