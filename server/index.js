@@ -5,11 +5,15 @@ const port = process.env.SERVER_PORT || 8080;
 
 // import router exported from routes file (use a unique name associated with your feature)
 // EXAMPLE ---> const products = require('./routes/route.example.js');
-
+const orders = require('./routes/orders.js');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.get('/orders', (req, res) => {
+  orders(req, res);
+});
 
 // instruct express to use your imported routes for any requests to a relevant endpoint
 // EXAMPLE ---> app.use('/products', products);

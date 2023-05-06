@@ -9,18 +9,18 @@ const router = new Router();
 
 // EXAMPLE BELOW
 
-// router.get('/orders', async (req, res) => {
-//   const { id } = req.params;
+router.get('/orders', async (req, res) => {
+  const { id } = req.params;
 
-//   try {
-//     const productInfo = await db.query("SELECT products.*, jsonb_agg(jsonb_build_object('feature', features.feature, 'value', features.value)) \
-//     AS features FROM products LEFT JOIN features ON products.id = features.product_id WHERE products.id = $1 GROUP BY products.id;", [id]);
-//     res.status(200).send(productInfo.rows[0]);
-//   } catch (e) {
-//     console.log('/products/:id route error', e);
-//     res.sendStatus(500);
-//   }
-// })
+  try {
+    // const productInfo = await db.query("SELECT products.*, jsonb_agg(jsonb_build_object('feature', features.feature, 'value', features.value)) \
+    // AS features FROM products LEFT JOIN features ON products.id = features.product_id WHERE products.id = $1 GROUP BY products.id;", [id]);
+    res.send('weeniedog').status(200);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+})
 
 // const singleProduct = (req, res) => {
 //   cache.get(`${req.params.product_id}SINGLE`)

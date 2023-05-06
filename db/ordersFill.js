@@ -2,7 +2,7 @@ const db = require('./index.js');
 
 /*
 The purpose of this file if so fill the tables that will be used by Orders
-node db/ordersFill.js
+To run the fill, enter node db/ordersFill.js into the command line
 */
 
 const ordersFill = async () => {
@@ -284,49 +284,3 @@ const ordersFill = async () => {
 
 // invoke the above function
 ordersFill();
-
-/*
-
- try {
-    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(2, 1, 6, '2023-05-06', '2023-07-06', false, false);`, []);
-  } catch (err) {
-    console.log('ERROR adding to users TABLE', err);
-  }
-
-   try {
-    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(4, 2, 5, '2023-05-06', '2023-07-06', false, false);`, []);
-  } catch (err) {
-    console.log('ERROR adding to users TABLE', err);
-  }
-
-   try {
-    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(6, 3, 4, '2023-05-06', '2023-07-06', false, false);`, []);
-  } catch (err) {
-    console.log('ERROR adding to users TABLE', err);
-  }
-
-   try {
-    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(8, 4, 3, '2023-05-06', '2023-07-06', false, false);`, []);
-  } catch (err) {
-    console.log('ERROR adding to users TABLE', err);
-  }
-
-   try {
-    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(10, 5, 2, '2023-05-06', '2023-07-06', false, false);`, []);
-  } catch (err) {
-    console.log('ERROR adding to users TABLE', err);
-  }
-
-   try {
-    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(12, 6, 1, '2023-05-06', '2023-07-06', false, false);`, []);
-  } catch (err) {
-    console.log('ERROR adding to users TABLE', err);
-  }
-
-*/
