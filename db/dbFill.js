@@ -2,7 +2,7 @@ const db = require('./index.js');
 
 /*
 The purpose of this file if so fill the tables that will be used by Orders
-To run the fill, enter node db/ordersFill.js into the command line
+To run the fill, enter node db/dbFill.js into the command line
 */
 
 const ordersFill = async () => {
@@ -108,7 +108,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
     VALUES('CJ', 'https://ca.slack-edge.com/T5B2RG0JW-U040DL9H830-0319ac0c5fd2-512',
-        'iodized','cje@basementeels.com', 'CJ', 'Edgecomb', 'Male', 25, false);`, []);
+        'iodized','cje@basementeels.com', 'CJ', 'Edgecomb', 'Male', 30, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
@@ -116,7 +116,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
     VALUES('Fig', 'https://ca.slack-edge.com/T5B2RG0JW-U040YT1BP0R-b0628c810199-512',
-        'NaCl','figf@basementeels.com', 'Fig', 'Fishkin', 'Non-Binary', 25, false);`, []);
+        'NaCl','figf@basementeels.com', 'Fig', 'Fishkin', 'Nonbinary', 31, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
@@ -132,7 +132,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
     VALUES('Kevin', 'https://ca.slack-edge.com/T5B2RG0JW-U040H9K99PF-61233b562bc7-512',
-        'sea','kevinh@basementeels.com', 'Kevin', 'Hoang', 'Male', 25, false);`, []);
+        'sea','kevinh@basementeels.com', 'Kevin', 'Hoang', 'Male', 27, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
