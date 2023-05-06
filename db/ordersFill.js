@@ -238,7 +238,47 @@ const ordersFill = async () => {
   }
 
   // BORROWED BOOKS
+  try {
+    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+      VALUES(2, 1, 6, '2023-05-06', '2023-07-06', false, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
 
+   try {
+    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+      VALUES(4, 2, 5, '2023-05-06', '2023-07-06', false, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
+
+   try {
+    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+      VALUES(6, 3, 4, '2023-05-06', '2023-07-06', false, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
+
+   try {
+    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+      VALUES(8, 4, 3, '2023-05-06', '2023-07-06', false, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
+
+   try {
+    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+      VALUES(10, 5, 2, '2023-05-06', '2023-07-06', false, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
+
+   try {
+    await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+      VALUES(12, 6, 1, '2023-05-06', '2023-07-06', false, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
 
 }
 
@@ -249,42 +289,42 @@ ordersFill();
 
  try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(2, 1, 6, , , false, false);`, []);
+      VALUES(2, 1, 6, '2023-05-06', '2023-07-06', false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(4, 2, 5, , , false, false);`, []);
+      VALUES(4, 2, 5, '2023-05-06', '2023-07-06', false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(6, 3, 4, , , false, false);`, []);
+      VALUES(6, 3, 4, '2023-05-06', '2023-07-06', false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(8, 4, 3, , , false, false);`, []);
+      VALUES(8, 4, 3, '2023-05-06', '2023-07-06', false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(10, 5, 2, , , false, false);`, []);
+      VALUES(10, 5, 2, '2023-05-06', '2023-07-06', false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(12, 6, 1, , , false, false);`, []);
+      VALUES(12, 6, 1, '2023-05-06', '2023-07-06', false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
