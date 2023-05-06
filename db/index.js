@@ -7,7 +7,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: process.env.PG_USER,
   // TODO: the PG_HOST environment variable will need to change when deploying
-  host: process.env.PG_HOST,
+  // host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   // port = 5432
