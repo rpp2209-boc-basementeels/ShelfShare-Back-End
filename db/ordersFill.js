@@ -249,42 +249,42 @@ ordersFill();
 
  try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(1, 6, true);`, []);
+      VALUES(2, 1, 6, , , false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(1, 6, true);`, []);
+      VALUES(4, 2, 5, , , false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(1, 6, true);`, []);
+      VALUES(6, 3, 4, , , false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(1, 6, true);`, []);
+      VALUES(8, 4, 3, , , false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(1, 6, true);`, []);
+      VALUES(10, 5, 2, , , false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
    try {
     await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-      VALUES(1, 6, true);`, []);
+      VALUES(12, 6, 1, , , false, false);`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
