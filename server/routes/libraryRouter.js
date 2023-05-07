@@ -12,7 +12,6 @@ libraryRouter.post('/library', async (req, res) => {
     let author;
     for (var i = 0; i < book.authors.length; i++) {
       author = book.authors[i];
-      console.log('author', author)
       await db.query(
         'INSERT INTO authors (author, isbn) VALUES($1, $2)',
         [author, book.ISBN]
