@@ -64,8 +64,8 @@ const rebuildDatabase = async () => {
       body text NOT NULL,
       title text NOT NULL,
       review_date date NOT NULL,
-      book_id integer REFERENCES books,
-      user_id integer REFERENCES users
+      book_id integer REFERENCES books(book_id),
+      user_id integer REFERENCES users(user_id)
     )`, []);
   } catch (err) {
     console.log('ERROR CREATING reviews TABLE', err);
@@ -75,8 +75,8 @@ const rebuildDatabase = async () => {
   try {
     await db.query(`CREATE TABLE book_ownerships (
       ownership_id serial PRIMARY KEY,
-      book_id integer REFERENCES books,
-      user_id integer REFERENCES users,
+      book_id integer REFERENCES books(book_id),
+      user_id integer REFERENCES users(user_id),
       is_available boolean NOT NULL
     )`, []);
   } catch (err) {
@@ -87,9 +87,9 @@ const rebuildDatabase = async () => {
   try {
     await db.query(`CREATE TABLE borrowed_books (
       borrowed_books_id serial PRIMARY KEY,
-      book_id integer REFERENCES books,
-      borrower_id integer REFERENCES users,
-      owner_id integer REFERENCES users,
+      book_id integer REFERENCES books(book_id),
+      borrower_id integer REFERENCES users(user_id),
+      owner_id integer REFERENCES users(user_id),
       borrow_date date NOT NULL,
       return_date date NOT NULL,
       shipped_to_borrower boolean DEFAULT false,
@@ -103,7 +103,7 @@ const rebuildDatabase = async () => {
   try {
     await db.query(`CREATE TABLE sessions (
       session_id serial PRIMARY KEY,
-      user_id integer REFERENCES users,
+      user_id integer REFERENCES users(user_id),
       hash text NOT NULL
     )`, []);
   } catch (err) {
