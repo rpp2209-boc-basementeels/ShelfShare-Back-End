@@ -23,7 +23,9 @@ const rebuildDatabase = async () => {
       genre text NOT NULL,
       pub_date date NOT NULL,
       isbn bigint UNIQUE NOT NULL,
-      image_url text NOT NULL)`, []);
+      image_url_small text NOT NULL,
+      image_url_med text NOT NULL
+    )`, []);
   } catch (err) {
     console.log('ERROR CREATING books TABLE', err);
   }
