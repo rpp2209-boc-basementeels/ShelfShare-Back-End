@@ -8,7 +8,7 @@ const db = require('./index.js');
 const rebuildDatabase = async () => {
   // drop all tables on the current database
   try {
-    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, users`, []);
+    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors, users`, []);
   } catch (err) {
     console.log('ERROR DROPPING EXISTING TABLES');
   }
@@ -19,14 +19,24 @@ const rebuildDatabase = async () => {
   try {
     await db.query(`CREATE TABLE books (
       book_id serial PRIMARY KEY,
-      author text NOT NULL,
       title text NOT NULL,
       genre text NOT NULL,
       pub_date date NOT NULL,
-      ISBN text NOT NULL,
+      isbn bigint UNIQUE NOT NULL,
       image_url text NOT NULL)`, []);
   } catch (err) {
     console.log('ERROR CREATING books TABLE', err);
+  }
+
+  // AUTHORS (necessitated by books with multiple authors)
+  try {
+    await db.query(`CREATE TABLE authors(
+      author_id serial PRIMARY KEY,
+      author text UNIQUE NOT NULL,
+      isbn bigint NOT NULL REFERENCES books(isbn)
+    )`, []);
+  } catch (err) {
+    console.log('ERROR CREATING authors TABLE', err);
   }
 
   // USERS
@@ -54,8 +64,8 @@ const rebuildDatabase = async () => {
       body text NOT NULL,
       title text NOT NULL,
       review_date date NOT NULL,
-      book_id integer REFERENCES books,
-      user_id integer REFERENCES users
+      book_id integer REFERENCES books(book_id),
+      user_id integer REFERENCES users(user_id)
     )`, []);
   } catch (err) {
     console.log('ERROR CREATING reviews TABLE', err);
@@ -65,8 +75,8 @@ const rebuildDatabase = async () => {
   try {
     await db.query(`CREATE TABLE book_ownerships (
       ownership_id serial PRIMARY KEY,
-      book_id integer REFERENCES books,
-      user_id integer REFERENCES users,
+      book_id integer REFERENCES books(book_id),
+      user_id integer REFERENCES users(user_id),
       is_available boolean NOT NULL
     )`, []);
   } catch (err) {
@@ -77,9 +87,9 @@ const rebuildDatabase = async () => {
   try {
     await db.query(`CREATE TABLE borrowed_books (
       borrowed_books_id serial PRIMARY KEY,
-      book_id integer REFERENCES books,
-      borrower_id integer REFERENCES users,
-      owner_id integer REFERENCES users,
+      book_id integer REFERENCES books(book_id),
+      borrower_id integer REFERENCES users(user_id),
+      owner_id integer REFERENCES users(user_id),
       borrow_date date NOT NULL,
       return_date date NOT NULL,
       shipped_to_borrower boolean DEFAULT false,
@@ -93,7 +103,7 @@ const rebuildDatabase = async () => {
   try {
     await db.query(`CREATE TABLE sessions (
       session_id serial PRIMARY KEY,
-      user_id integer REFERENCES users,
+      user_id integer REFERENCES users(user_id),
       hash text NOT NULL
     )`, []);
   } catch (err) {
