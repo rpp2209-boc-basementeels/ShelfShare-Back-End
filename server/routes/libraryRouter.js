@@ -6,8 +6,8 @@ libraryRouter.post('/library', async (req, res) => {
   try {
     const book = req.body;
     await db.query(
-      'INSERT INTO books (title, genre, pub_date, isbn, image_url) VALUES($1, $2, $3, $4, $5)',
-      [book.title, book.genre, book.pub_date, book.ISBN, book.image_url]
+      'INSERT INTO books (title, genre, pub_date, isbn, image_url_small, image_url_med, image_url_large) VALUES($1, $2, $3, $4, $5, $6, $7)',
+      [book.title, book.genre, book.pub_date, book.ISBN, book.image_url_small, book.image_url_med, book.image_url_large]
     );
     let author;
     for (var i = 0; i < book.authors.length; i++) {
