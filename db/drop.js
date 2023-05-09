@@ -8,7 +8,7 @@ const db = require('./index.js');
 const rebuildDatabase = async () => {
   // drop all tables on the current database
   try {
-    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors, users`, []);
+    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors`, []);
   } catch (err) {
     console.log('ERROR DROPPING EXISTING TABLES');
   }
@@ -43,22 +43,22 @@ const rebuildDatabase = async () => {
   }
 
   // USERS
-  try {
-    await db.query(`CREATE TABLE users (
-      user_id serial PRIMARY KEY,
-      username text NOT NULL,
-      photo_url text,
-      salt text NOT NULL,
-      email text NOT NULL,
-      first_name text NOT NULL,
-      last_name text NOT NULL,
-      gender text NOT NULL,
-      age text NOT NULL,
-      is_library boolean NOT NULL
-    )`, []);
-  } catch (err) {
-    console.log('ERROR CREATING users TABLE', err);
-  }
+  // try {
+  //   await db.query(`CREATE TABLE users (
+  //     user_id serial PRIMARY KEY,
+  //     username text NOT NULL,
+  //     photo_url text,
+  //     salt text NOT NULL,
+  //     email text NOT NULL,
+  //     first_name text NOT NULL,
+  //     last_name text NOT NULL,
+  //     gender text NOT NULL,
+  //     age text NOT NULL,
+  //     is_library boolean NOT NULL
+  //   )`, []);
+  // } catch (err) {
+  //   console.log('ERROR CREATING users TABLE', err);
+  // }
 
   // REVIEWS
   try {
