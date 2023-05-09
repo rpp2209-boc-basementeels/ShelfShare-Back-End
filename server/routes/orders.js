@@ -5,16 +5,6 @@ const Router = require('express-promise-router');
 // create new router instance
 const router = new Router();
 
-/*
-select
-  (select json_agg(o) as borrowed
-   from (select * from borrowed_books where owner_id = 1) as o),
-  (select json_agg(b) as borrowed
-   from (select * from borrowed_books where borrower_id = 1) as b)
-   from borrowed_books where owner_id = 1;
-*/
-
-
 router.get('/orders', async (req, res) => {
   const id  = req.query;
   console.log(id);
