@@ -20,8 +20,8 @@ libraryRouter.post('/library', async (req, res) => {
   try {
     const book = req.body;
     let insertedBookId = await db.query(
-      'INSERT INTO books (title, genre, pub_date, isbn, image_url_small, image_url_med, image_url_large) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING book_id',
-      [book.title, book.genre, book.pub_date, book.ISBN, book.image_url_small, book.image_url_med, book.image_url_large]
+      'INSERT INTO books (title, genre, pub_date, isbn, image_url) VALUES($1, $2, $3, $4, $5) RETURNING book_id',
+      [book.title, book.genre, book.pub_date, book.ISBN, book.image_url]
     );
 
     insertedBookId = insertedBookId.rows[0].book_id;
