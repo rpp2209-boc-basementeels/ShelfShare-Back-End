@@ -8,7 +8,7 @@ const db = require('./index.js');
 const rebuildDatabase = async () => {
   // drop all tables on the current database
   try {
-    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors`, []);
+    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors, users`, []);
   } catch (err) {
     console.log('ERROR DROPPING EXISTING TABLES');
   }
