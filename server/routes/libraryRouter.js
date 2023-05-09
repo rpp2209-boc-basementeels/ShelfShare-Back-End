@@ -2,11 +2,17 @@ const db = require('../../db');
 const Router = require('express-promise-router');
 const libraryRouter = new Router();
 
-libraryRouter.get('/library', async (req, res) => {
+libraryRouter.get('/:libraryOwner/library', async (req, res) => {
+  const libraryOwner = req.params.libraryOwner;
   try {
-
+    let libraryData = await db.query(
+      'SELECT * FROM books INNER JOIN authors ON books.isbn = authors.isbn WHERE book_id IN (SELECT book_id FROM book_ownerships WHERE user_id IN (SELECT user_id FROM users WHERE username = $1))',
+      [libraryOwner]
+    );
+    res.status(200).send(libraryData.rows);
   } catch (error) {
-
+    console.log(error);
+    res.status(500).send('Error getting library.');
   }
 });
 
