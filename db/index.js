@@ -12,9 +12,9 @@ const pool = new Pool({
   password: process.env.PG_PASSWORD,
   // port = 5432
   port: process.env.PG_PORT
-})
+});
 
 // exports a query function that will return the result of a pool query
 module.exports = {
   query: (text, params) => pool.query(text, params)
-}
+};
