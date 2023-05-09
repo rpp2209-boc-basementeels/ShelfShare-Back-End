@@ -5,15 +5,25 @@ const Router = require('express-promise-router');
 // create new router instance
 const router = new Router();
 
-router.get('/orders', async (req, res) => {
-  const { id } = req.params;
-  console.log(client)
+/*
+`select *, (select json_agg(b) as borrowed from (select * borrowed_books where borrower_id = ${testId}) as b) from borrowed_books where owner_id =${testId};`)
+*/
 
-  client.query("select * from users")
+
+router.get('/orders', async (req, res) => {
+  const id  = req.query;
+  console.log(id);
+  console.log(req.cookies)
+  var testId = 1;
+  var sendList = {};
+  client.query(`select *,
+  (select json_agg(b) as borrowed
+   from (select * from borrowed_books where borrower_id = 1) as b)
+   from borrowed_books where owner_id = 1;`)
     .then((orders) => {
-      // send first, then save the data into the cache
-      console.log(orders.rows);
-      res.sendStatus(200);
+      console.log(orders.rows)
+      sendList.borrowed = orders.rows;
+      res.send(orders.rows).status(201);
     })
     .catch((err) => { res.sendStatus(500); throw err; });
 
