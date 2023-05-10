@@ -3,9 +3,9 @@ const client = require('../../db/index.js');
 const Router = require('express-promise-router');
 
 // create new router instance
-const router = new Router();
+const orders = new Router();
 
-router.get('/orders', async (req, res) => {
+orders.get('/orders', async (req, res) => {
   const id  = req.query;
   console.log(id);
   console.log(req.cookies)
@@ -15,8 +15,9 @@ router.get('/orders', async (req, res) => {
   select
   (select json_agg(o) as owned
    from (select * from borrowed_books where owner_id = ${testId}) as o),
-  (select json_agg(b) as borrowed
-   from (select * from borrowed_books where borrower_id = ${testId}) as b)
+
+  (select json_agg(b) as books
+   from (select * from books where books.book_id = borrowed_books.book_id) as b)
    from borrowed_books where owner_id = ${testId};
   `)
     .then((orders) => {
@@ -29,4 +30,31 @@ router.get('/orders', async (req, res) => {
   })
 
 // export router to import on server file
-module.exports = router;
+module.exports = orders;
+
+/*
+
+this is my SDC query. I'm trying to see how I set up my aggregate calls and apply them here
+
+client.query(`select *, (select json_agg(f) as features
+from (select feature, value from features where features.product_id = productlist.product_id) as f)
+from productlist where product_id =${req.params.product_id};`)
+
+
+
+  select
+  (select json_agg(o) as owned
+   from (select * from borrowed_books where owner_id = ${testId}) as o),
+
+  (select json_agg(b) as books
+   from (select * from books where books.book_id = borrowed_books.book_id) as b)
+   from borrowed_books where owner_id = ${testId};
+
+
+
+select *, (select json_agg(f) as features
+from (select feature, value from features where features.product_id = productlist.product_id) as f)
+from productlist where product_id =${req.params.product_id};
+
+
+*/
