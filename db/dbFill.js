@@ -43,7 +43,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('How to Build a Basement Eel Pond', '2022-09-01', 'Home Improvement',
-    'https://cdn2.cincinnatimagazine.com/wp-content/uploads/sites/5/2022/07/eelguy-7.jpg', 4444444444444);`, []);
+        'https://cdn2.cincinnatimagazine.com/wp-content/uploads/sites/5/2022/07/eelguy-7.jpg', 4444444444444);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
