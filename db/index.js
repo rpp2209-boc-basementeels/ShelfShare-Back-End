@@ -15,5 +15,6 @@ const pool = new Pool({
 
 // exports a query function that will return the result of a pool query
 module.exports = {
-  query: (text, params) => pool.query(text, params)
+  query: (text, params) => pool.query(text, params),
+  end: () => pool.end()
 };
