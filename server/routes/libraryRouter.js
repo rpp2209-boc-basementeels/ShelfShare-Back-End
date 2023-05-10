@@ -2,11 +2,40 @@ const db = require('../../db');
 const Router = require('express-promise-router');
 const libraryRouter = new Router();
 
+libraryRouter.get('/:user/borrowed', async (req, res) => {
+  const user = req.params.user;
+  console.log('THE USER', user)
+  try {
+    let libraryData = await db.query(
+      'SELECT * FROM books INNER JOIN borrowed_books ON books.book_id = borrowed_books.book_id INNER JOIN authors ON books.isbn = authors.isbn WHERE books.book_id IN (SELECT book_id FROM borrowed_books WHERE borrower_id IN (SELECT user_id FROM users WHERE username = $1));',
+      [user]
+    );
+    res.status(200).send(libraryData.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error getting library.');
+  }
+});
+
+libraryRouter.get('/:user/lent', async (req, res) => {
+  const user = req.params.user;
+  try {
+    let libraryData = await db.query(
+      'SELECT * FROM books INNER JOIN borrowed_books ON books.book_id = borrowed_books.book_id INNER JOIN authors ON books.isbn = authors.isbn WHERE books.book_id IN (SELECT book_id FROM borrowed_books WHERE owner_id IN (SELECT user_id FROM users WHERE username = $1));',
+      [user]
+    );
+    res.status(200).send(libraryData.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error getting library.');
+  }
+});
+
 libraryRouter.get('/:libraryOwner/library', async (req, res) => {
   const libraryOwner = req.params.libraryOwner;
   try {
     let libraryData = await db.query(
-      'SELECT * FROM books INNER JOIN authors ON books.isbn = authors.isbn WHERE book_id IN (SELECT book_id FROM book_ownerships WHERE user_id IN (SELECT user_id FROM users WHERE username = $1))',
+      'SELECT * FROM books INNER JOIN authors ON books.isbn = authors.isbn WHERE book_id IN (SELECT book_id FROM book_ownerships WHERE user_id IN (SELECT user_id FROM users WHERE username = $1) AND is_available = true)',
       [libraryOwner]
     );
     res.status(200).send(libraryData.rows);
