@@ -114,4 +114,3 @@ const rebuildDatabase = async () => {
 
 // invoke the above function
 rebuildDatabase();
-

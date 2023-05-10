@@ -365,6 +365,202 @@ const ordersFill = async () => {
     console.log('ERROR adding to users TABLE', err);
   }
 
+  /////////////////////////////////////////////////////////////////////////////////////
+  // Order's testing functionality
+  try {
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    VALUES('Test1', 'https://cdn.slidesharecdn.com/ss_thumbnails/test1-190307023259-thumbnail.jpg?w=3840&q=90',
+        'salty','test1@test.com', 'Test1', 'Test1Last', 'Male', 30, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    VALUES('Test2', 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Test2_de_Liverc.png',
+        'salado','test2@test.com', 'Test2', 'Test2Last', 'Male', 30, false);`, []);
+  } catch (err) {
+    console.log('ERROR adding to users TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
+    VALUES('PostgreSQL for dummies', '2022-09-01', 'Educational',
+        'https://bit.ly/3pgkvxA', 9000000000001);`, []);
+  } catch (err) {
+    console.log('ERROR adding to books TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
+    VALUES('Express: That was quick', '2022-09-01', 'Educational',
+        'https://bit.ly/3pgkvxA', 9000000000002);`, []);
+  } catch (err) {
+    console.log('ERROR adding to books TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
+    VALUES('Redux: A Greate State of Mind', '2022-09-01', 'Fiction',
+        'https://bit.ly/3pgkvxA', 9000000000003);`, []);
+  } catch (err) {
+    console.log('ERROR adding to books TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
+    VALUES('Cookies: from Parsing to Ovens', '2022-09-01', 'Cooking',
+        'https://bit.ly/3pgkvxA', 9000000000004);`, []);
+  } catch (err) {
+    console.log('ERROR adding to books TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
+    VALUES('What I learned in boating school is...', '2022-09-01', 'Biography',
+        'https://bit.ly/3pgkvxA', 9000000000005);`, []);
+  } catch (err) {
+    console.log('ERROR adding to books TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
+    VALUES('The Rise and Fall of Limewire', '2022-09-01', 'Non-Fiction',
+        'https://bit.ly/3pgkvxA', 9000000000006);`, []);
+  } catch (err) {
+    console.log('ERROR adding to books TABLE', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO authors(author, isbn)
+    VALUES('El Ephant', 9000000000001);`, []);
+} catch (err) {
+  console.log('ERROR adding to authors TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO authors(author, isbn)
+  VALUES('I. M. Speed', 9000000000002);`, []);
+} catch (err) {
+console.log('ERROR adding to authors TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO authors(author, isbn)
+  VALUES('Reduce Reuse Refactor', 9000000000003);`, []);
+} catch (err) {
+console.log('ERROR adding to authors TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO authors(author, isbn)
+  VALUES('Chris P. Byte', 9000000000004);`, []);
+} catch (err) {
+console.log('ERROR adding to authors TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO authors(author, isbn)
+  VALUES('Poppy Puff', 9000000000005);`, []);
+} catch (err) {
+console.log('ERROR adding to authors TABLE', err);
+}
+  try {
+    await db.query(`INSERT INTO authors(author, isbn)
+    VALUES('Piers T. Piers', 9000000000006);`, []);
+} catch (err) {
+  console.log('ERROR adding to authors TABLE', err);
+}
+
+
+try {
+  await db.query(`INSERT INTO book_ownerships(book_id, user_id, is_available)
+    VALUES(13, 7, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO book_ownerships(book_id, user_id, is_available)
+    VALUES(14, 7, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO book_ownerships(book_id, user_id, is_available)
+    VALUES(15, 7, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO book_ownerships(book_id, user_id, is_available)
+    VALUES(16, 8, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO book_ownerships(book_id, user_id, is_available)
+    VALUES(17, 8, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO book_ownerships(book_id, user_id, is_available)
+    VALUES(18, 8, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+//7 for Test1, 8 for Test2
+// 13-18 for books
+
+try {
+  await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+    VALUES(13, 8, 7, '2023-05-06', '2023-07-06', false, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+    VALUES(14, 8, 7, '2023-05-06', '2023-07-06', false, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+    VALUES(15, 8, 7, '2023-05-06', '2023-07-06', false, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+    VALUES(16, 7, 8, '2023-05-06', '2023-07-06', false, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+    VALUES(17, 7, 8, '2023-05-06', '2023-07-06', false, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+try {
+  await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+    VALUES(18, 7, 8, '2023-05-06', '2023-07-06', false, false);`, []);
+} catch (err) {
+  console.log('ERROR adding to users TABLE', err);
+}
+
+
 }
 
 // invoke the above function
