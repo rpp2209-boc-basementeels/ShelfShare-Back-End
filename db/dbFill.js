@@ -9,97 +9,97 @@ const ordersFill = async () => {
 
   // BOOKS
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('Snake Eater: Survival Cooking Basics', '2022-09-01', 'Cooking',
-        'https://bit.ly/3pgkvxA', 'https://bit.ly/3pgkvxA', 'https://bit.ly/3pgkvxA', 1000000000000);`, []);
+        'https://bit.ly/3pgkvxA', 1000000000000);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Fancy Life of Sqwilliam Fancyson', '2022-09-01', 'Autobiography',
-        'https://i1.sndcdn.com/avatars-000451991661-3mzpc2-t500x500.jpg', 'https://i1.sndcdn.com/avatars-000451991661-3mzpc2-t500x500.jpg', 'https://i1.sndcdn.com/avatars-000451991661-3mzpc2-t500x500.jpg', 1111111111111);`, []);
+        'https://i1.sndcdn.com/avatars-000451991661-3mzpc2-t500x500.jpg', 1111111111111);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('Raw Potatoes: The New Superfood', '2022-09-01', 'Cooking',
-        'https://i.ytimg.com/vi/rslMkAUS_BM/maxresdefault.jpg', 'https://i.ytimg.com/vi/rslMkAUS_BM/maxresdefault.jpg', 'https://i.ytimg.com/vi/rslMkAUS_BM/maxresdefault.jpg', 2222222222222);`, []);
+        'https://i.ytimg.com/vi/rslMkAUS_BM/maxresdefault.jpg', 2222222222222);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Krabby Patty Secret Formula', '2022-09-01', 'Cooking',
-        'https://bit.ly/3HJNNuX', 'https://bit.ly/3HJNNuX', 'https://bit.ly/3HJNNuX', 3333333333333);`, []);
+        'https://bit.ly/3HJNNuX', 3333333333333);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('How to Build a Basement Eel Pond', '2022-09-01', 'Home Improvement',
-        'https://cdn2.cincinnatimagazine.com/wp-content/uploads/sites/5/2022/07/eelguy-7.jpg', 'https://cdn2.cincinnatimagazine.com/wp-content/uploads/sites/5/2022/07/eelguy-7.jpg', 'https://cdn2.cincinnatimagazine.com/wp-content/uploads/sites/5/2022/07/eelguy-7.jpg', 4444444444444);`, []);
+        'https://cdn2.cincinnatimagazine.com/wp-content/uploads/sites/5/2022/07/eelguy-7.jpg', 4444444444444);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('Life of 3.1415926535897932384626433832795029', '2022-09-01', 'Educational',
-        'https://bigthink.com/wp-content/uploads/2023/03/picover.png', 'https://bigthink.com/wp-content/uploads/2023/03/picover.png', 'https://bigthink.com/wp-content/uploads/2023/03/picover.png', 5555555555555);`, []);
+        'https://bigthink.com/wp-content/uploads/2023/03/picover.png', 5555555555555);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Many Adventures of Weenie Dog', '2022-09-01', 'Fiction',
-        'https://i.pinimg.com/originals/6a/14/de/6a14de48ce302cb067b08b47c35f832b.jpg', 'https://i.pinimg.com/originals/6a/14/de/6a14de48ce302cb067b08b47c35f832b.jpg', 'https://i.pinimg.com/originals/6a/14/de/6a14de48ce302cb067b08b47c35f832b.jpg', 6666666666666);`, []);
+        'https://i.pinimg.com/originals/6a/14/de/6a14de48ce302cb067b08b47c35f832b.jpg', 6666666666666);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('New Age Potato Smashing', '2022-09-01', 'Educational',
-        'https://cdn.drawception.com/images/panels/2015/5-30/4mHXP2HwaF-12.png', 'https://cdn.drawception.com/images/panels/2015/5-30/4mHXP2HwaF-12.png', 'https://cdn.drawception.com/images/panels/2015/5-30/4mHXP2HwaF-12.png', 7777777777777);`, []);
+        'https://cdn.drawception.com/images/panels/2015/5-30/4mHXP2HwaF-12.png', 7777777777777);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Art of Closing a Real Estate Deal', '2022-09-01', 'Self Help',
-        'https://www.linkedin.com/in/knhoangre/', 'https://www.linkedin.com/in/knhoangre/', 'https://www.linkedin.com/in/knhoangre/', 8888888888888);`, []);
+        'https://www.linkedin.com/in/knhoangre/', 8888888888888);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('Recursion: Base-Case, or Recursion: Base-Case, or Recursion:...', '2022-09-01', 'Educational',
-        'https://cdn-media-1.freecodecamp.org/images/jmeNsqCO7uKkMMalBrExBrGu-nMuY4bJGOAT', 'https://cdn-media-1.freecodecamp.org/images/jmeNsqCO7uKkMMalBrExBrGu-nMuY4bJGOAT', 'https://cdn-media-1.freecodecamp.org/images/jmeNsqCO7uKkMMalBrExBrGu-nMuY4bJGOAT', 9999999999999);`, []);
+        'https://cdn-media-1.freecodecamp.org/images/jmeNsqCO7uKkMMalBrExBrGu-nMuY4bJGOAT', 9999999999999);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('I Fell Asleep on the Keyboard', '2022-09-01', 'Self Help',
-        'https://i.pinimg.com/originals/e4/48/49/e448497fd3bda2868e93ce5fc3aa4089.jpg', 'https://i.pinimg.com/originals/e4/48/49/e448497fd3bda2868e93ce5fc3aa4089.jpg', 'https://i.pinimg.com/originals/e4/48/49/e448497fd3bda2868e93ce5fc3aa4089.jpg', 1234567890123);`, []);
+        'https://i.pinimg.com/originals/e4/48/49/e448497fd3bda2868e93ce5fc3aa4089.jpg', 1234567890123);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO books(title, pub_date, genre, image_url_small, image_url_med, image_url_large, isbn)
+    await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Swamp Provides', '2022-09-01', 'Novel',
-        'https://bit.ly/3HLq6m1', 'https://bit.ly/3HLq6m1', 'https://bit.ly/3HLq6m1', 3210987654321);`, []);
+        'https://bit.ly/3HLq6m1', 3210987654321);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
