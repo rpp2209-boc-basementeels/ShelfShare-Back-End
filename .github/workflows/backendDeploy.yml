@@ -1,0 +1,45 @@
+name: ShelfShare Back End CD
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/shelfshare-back-end:latest
+          
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          key: ${{ secrets.PASSWORD }}
+          script: |
+            sudo docker login
+            sudo docker pull cjedgecombe/shelfshare-back-end:latest
+            sudo docker container stop shelfshareBE
+            sudo docker container rm shelfshareBE
+            sudo docker run -d --name shelfshareBE -e PG_USER=${{ secrets.PG_USER }} -e PG_HOST=${{ secrets.PG_HOST }} -e PG_DATABASE=${{ secrets.PG_DATABASE }} -e PG_PASSWORD=${{ secrets.PG_PASSWORD }} -e PG_PORT=${{ secrets.PG_PORT }} -p 80:8080 cjedgecombe/shelfshare-back-end:latest
+            sudo docker image prune -f
