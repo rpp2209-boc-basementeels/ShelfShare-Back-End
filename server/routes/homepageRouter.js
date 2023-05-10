@@ -9,13 +9,13 @@ const homepageRouter = new Router();
 
 homepageRouter.get('/trending', async (req, res) => {
   try {
-    let trendingData = await db.query(
-      'SELECT * FROM books WHERE id < 11'
+    let bookData = await db.query(
+      'SELECT * FROM books'
     );
-    res.status(200).send(trendingData.rows);
+    res.status(200).send(bookData.rows);
   } catch (error) {
     console.log(error);
-    res.status(500).send('Error retrieving trending books');
+    res.status(500).send('Error retrieving books');
   }
 })
 
