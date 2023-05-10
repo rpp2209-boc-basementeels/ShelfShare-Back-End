@@ -10,7 +10,7 @@ const homepageRouter = new Router();
 homepageRouter.get('/trending', async (req, res) => {
   try {
     let trendingData = await db.query(
-      'SELECT * FROM books WHERE id < 11'
+      'SELECT * FROM books'
     );
     res.status(200).send(trendingData.rows);
   } catch (error) {
