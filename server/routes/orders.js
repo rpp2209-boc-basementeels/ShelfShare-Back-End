@@ -5,8 +5,8 @@ const Router = require('express-promise-router');
 // create new router instance
 const orders = new Router();
 
-orders.get('/orders', async (req, res) => {
-  var testId = 7;
+orders.get('/orders/:user_id', async (req, res) => {
+  let user = req.params.user_id;
   client.query(`
   select
 
@@ -15,19 +15,19 @@ orders.get('/orders', async (req, res) => {
   (select json_agg(d) as details
    from (select author, title from authors INNER JOIN books ON authors.isbn = books.isbn
     where books.book_id = borrowed_books.book_id) as d))
-    from borrowed_books where owner_id = ${testId}) as o),
+    from borrowed_books where owner_id = ${user}) as o),
 
   (select json_agg(b) as borrowed
    from (select borrow_date, return_date, shipped_to_borrower, shipped_to_owner, (
   (select json_agg(d) as details
    from (select author, title from authors INNER JOIN books ON authors.isbn = books.isbn
     where books.book_id = borrowed_books.book_id) as d))
-    from borrowed_books where borrower_id = ${testId}) as b)
+    from borrowed_books where borrower_id = ${user}) as b)
 
-   from borrowed_books where owner_id = ${testId};
+   from borrowed_books where owner_id = ${user};
   `)
     .then((orders) => {
-      res.send(orders.rows).status(201);
+      res.send(orders.rows).status(200);
     })
     .catch((err) => { res.sendStatus(500); throw err; });
   })
