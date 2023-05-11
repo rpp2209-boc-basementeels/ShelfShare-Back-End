@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser');
 const libraryRouter = require('./routes/libraryRouter.js');
 const orders = require('./routes/orders.js');
 const authorization = require('./routes/authorization.js');
+const homepageRouter = require('./routes/homepageRouter.js');
 // console.log(libraryRouter);
 // console.log(authorization);
 
@@ -28,16 +29,16 @@ app.get('/bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../../ShelfShare-2/public/dist/bundle.js'));
 });
 
-app.get('/orders', (req, res) => {
-  orders(req, res);
-});
-
 // instruct express to use your imported routes for any requests to a relevant endpoint
 // EXAMPLE ---> app.use('/products', products);
 app.use(libraryRouter);
 
 app.use(authorization);
 
+app.use(homepageRouter);
+
+app.use(orders);
+
 app.listen(port, () => {
   console.log(`Server running and ready for connections on port ${port}`);
-})
+});
