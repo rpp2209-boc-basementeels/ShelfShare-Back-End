@@ -8,6 +8,7 @@ const homepageRouter = new Router();
 // define endpoints
 
 homepageRouter.get('/trending', async (req, res) => {
+  console.log('homepage backend router reached - page load');
   try {
     let bookData = await db.query(
       'SELECT * FROM books'
@@ -16,6 +17,20 @@ homepageRouter.get('/trending', async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send('Error retrieving books');
+  }
+})
+
+homepageRouter.get('/detail', async (req, res) => {
+  const bookId = req.params.bookId;
+  console.log('homepage backend router reached');
+  try {
+    let oneBook = await db.query(
+      `SELECT * FROM books WHERE book_id = ${bookId}`
+    );
+    res.status(200).send(oneBook.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error retrieving book');
   }
 })
 
