@@ -82,7 +82,7 @@ const updateTable = (table, whereObj, setObj, callback) => {
 };
 
 const getID = (table, obj, callback) => {
-  db.query(`SELECT id FROM ${table} ${constructWhere(obj)};`)
+  db.query(`SELECT user_id FROM ${table} ${constructWhere(obj)};`)
     .then(data => callback(null, data.rows))
     .catch(err => callback(err));
 };

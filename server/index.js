@@ -1,4 +1,6 @@
 require('dotenv').config();
+// const db = require('../db/index.js');
+// console.log(db);
 const cors = require('cors');
 const express = require('express');
 const port = process.env.SERVER_PORT || 8080;

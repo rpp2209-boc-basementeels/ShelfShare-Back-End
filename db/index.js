@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+
 // adds the pooling functionality from node-postgres
 const { Pool } = require('pg');
 
@@ -7,12 +8,12 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: process.env.PG_USER,
   // TODO: the PG_HOST environment variable will need to change when deploying
-  // host: process.env.PG_HOST,
+  host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   // port = 5432
   port: process.env.PG_PORT
-})
+});
 
 // exports a query function that will return the result of a pool query
 module.exports = {
