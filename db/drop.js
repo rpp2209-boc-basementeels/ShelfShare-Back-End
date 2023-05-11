@@ -66,8 +66,8 @@ const rebuildDatabase = async () => {
       body text NOT NULL,
       title text NOT NULL,
       review_date date NOT NULL,
-      book_id integer REFERENCES books(book_id),
-      user_id integer REFERENCES users(user_id)
+      username text NOT NULL,
+      book_id integer REFERENCES books(book_id)
     )`, []);
   } catch (err) {
     console.log('ERROR CREATING reviews TABLE', err);
