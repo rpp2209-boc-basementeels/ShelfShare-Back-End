@@ -32,7 +32,7 @@ orders.get('/orders/:user_id', async (req, res) => {
     .catch((err) => { res.sendStatus(500); throw err; });
   })
 
-  orders.post('/orders', async (req, res) => {
+  orders.put('/orders', async (req, res) => {
 
   })
 
