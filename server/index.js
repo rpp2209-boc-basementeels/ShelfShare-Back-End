@@ -11,8 +11,7 @@ const libraryRouter = require('./routes/libraryRouter.js');
 const orders = require('./routes/orders.js');
 const authorization = require('./routes/authorization.js');
 const homepageRouter = require('./routes/homepageRouter.js');
-// console.log(libraryRouter);
-// console.log(authorization);
+const usageRouter = require('./routes/usage.js');
 
 const app = express();
 app.use(express.json());
@@ -36,6 +35,8 @@ app.use(authorization);
 app.use(homepageRouter);
 
 app.use(orders);
+
+app.use(usageRouter);
 
 app.listen(port, () => {
   console.log(`Server running and ready for connections on port ${port}`);
