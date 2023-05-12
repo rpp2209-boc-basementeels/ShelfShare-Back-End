@@ -13,6 +13,7 @@ const libraryRouter = require('./routes/libraryRouter.js');
 const orders = require('./routes/orders.js');
 const authorization = require('./routes/authorization.js');
 const homepageRouter = require('./routes/homepageRouter.js');
+const profileRouter = require('./routes/profileRouter.js');
 // console.log(libraryRouter);
 // console.log(authorization);
 
@@ -38,6 +39,8 @@ app.use(authorization);
 app.use(homepageRouter);
 
 app.use(orders);
+
+app.use(profileRouter);
 
 app.listen(port, () => {
   console.log(`Server running and ready for connections on port ${port}`);

@@ -1,7 +1,7 @@
 const db = require('./index.js');
 
 /*
-The purpose of this file if so fill the tables that will be used by Orders
+The purpose of this file is to fill the tables that will be used by Orders
 To run the fill, enter node db/dbFill.js into the command line
 */
 
