@@ -22,7 +22,6 @@ router.get('/email', (req, res) => {
 });
 
 router.patch('/updateSaltHash', (req, res) => {
-  console.log(req.cookies)
   const salt = generator.generatorSalt(req.cookies.g_state);
   const hash = generator.generatorHash(req.cookies.g_state, salt);
   const whereObj = req.body;
@@ -37,7 +36,7 @@ router.patch('/updateSaltHash', (req, res) => {
           res.status(500).send('2');
         } else {
           const result = {
-            user_id: data[0].id
+            user_id: data[0].user_id
           };
           dbQuery.updateTable('sessions', result, setHashObj, (err, data) => {
             if (err) {
@@ -53,7 +52,6 @@ router.patch('/updateSaltHash', (req, res) => {
 });
 
 router.post('/newUser', (req, res) => {
-  console.log(req.cookies)
   const salt = generator.generatorSalt(req.cookies.g_state);
   const hash = generator.generatorHash(req.cookies.g_state, salt);
   const result = {
@@ -67,7 +65,7 @@ router.post('/newUser', (req, res) => {
     } else {
       dbQuery.getID('users', { email: req.body.email }, (err, data) => {
         const result2 = {
-          user_id: data[0].id,
+          user_id: data[0].user_id,
           hash: hash,
         };
         dbQuery.addToTable('sessions', result2, (err, data) => {
