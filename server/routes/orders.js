@@ -18,7 +18,7 @@ let sendSort = (obj) => {
   // loaned books
   for (var i = 0; i < obj.loaned.length; i++) {
     let loanedBook = obj.loaned[i];
-    if (loanedBook.shipped_to_borrower === false && loanedBook.shipped_to_borrower === false) {
+    if (loanedBook.shipped_to_borrower === false && loanedBook.shipped_to_owner === false) {
       clean.pending.push(loanedBook);
     } else {
       clean.loaned.push(loanedBook)
@@ -27,7 +27,7 @@ let sendSort = (obj) => {
   // borrowed books
   for (var j = 0; j < obj.borrowed.length; j++) {
     let borrowedBook = obj.borrowed[j];
-    if (borrowedBook.shipped_to_borrower === false && borrowedBook.shipped_to_borrower === false) {
+    if (borrowedBook.shipped_to_borrower === false && borrowedBook.shipped_to_owner === false) {
       clean.pending.push(borrowedBook);
     } else {
       clean.borrowed.push(borrowedBook)
@@ -58,12 +58,9 @@ orders.get('/orders/:user_id', async (req, res) => {
    from borrowed_books where owner_id = ${user};
   `)
     .then((orders) => {
-      // console.log(orders.rows[0])
-
-      // console.log(Object.keys(sendList.loaned[0]))
       res.send(sendSort(orders.rows[0])).status(200);
     })
-    .catch((err) => { res.sendStatus(500); throw err; });
+    .catch((err) => { res.sendStatus(500); console.log(err); throw err; });
   })
 
   orders.patch('/orders', async (req, res) => {

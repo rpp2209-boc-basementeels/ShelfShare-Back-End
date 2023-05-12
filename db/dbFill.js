@@ -527,14 +527,14 @@ try {
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(14, 8, 7, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(14, 8, 7, '2023-05-06', '2023-07-06', true, false);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(15, 8, 7, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(15, 8, 7, '2023-05-06', '2023-07-06', false, true);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
@@ -548,14 +548,14 @@ try {
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(17, 7, 8, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(17, 7, 8, '2023-05-06', '2023-07-06', true, false);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(18, 7, 8, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(18, 7, 8, '2023-05-06', '2023-07-06', false, true);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
