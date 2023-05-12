@@ -64,7 +64,6 @@ const rebuildDatabase = async () => {
     await db.query(`CREATE TABLE reviews (
       review_id serial PRIMARY KEY,
       body text NOT NULL,
-      title text NOT NULL,
       review_date date NOT NULL,
       username text NOT NULL,
       book_id integer REFERENCES books(book_id)
