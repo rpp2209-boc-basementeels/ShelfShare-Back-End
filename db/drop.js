@@ -51,7 +51,7 @@ const rebuildDatabase = async () => {
       first_name text NOT NULL,
       last_name text NOT NULL,
       gender text NOT NULL,
-      age text NOT NULL,
+      age integer NOT NULL,
       is_library boolean NOT NULL,
       address text NOT NULL
     )`, []);
@@ -116,7 +116,7 @@ const rebuildDatabase = async () => {
     await db.query(`CREATE TABLE usage (
       transaction_id serial PRIMARY KEY,
       isbn bigint NOT NULL,
-      user_age int NOT NULL,
+      user_age integer NOT NULL,
       user_gender text NOT NULL,
       book_genre text NOT NULL,
       transaction_date date NOT NULL
