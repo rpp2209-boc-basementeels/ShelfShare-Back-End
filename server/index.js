@@ -1,4 +1,6 @@
 require('dotenv').config();
+// const db = require('../db/index.js');
+// console.log(db);
 const cors = require('cors');
 const express = require('express');
 const port = process.env.SERVER_PORT || 8080;
@@ -12,6 +14,7 @@ const orders = require('./routes/orders.js');
 const authorization = require('./routes/authorization.js');
 const homepageRouter = require('./routes/homepageRouter.js');
 const usageRouter = require('./routes/usage.js');
+const profileRouter = require('./routes/profileRouter.js');
 
 const app = express();
 app.use(express.json());
@@ -37,6 +40,8 @@ app.use(homepageRouter);
 app.use(orders);
 
 app.use(usageRouter);
+
+app.use(profileRouter);
 
 app.listen(port, () => {
   console.log(`Server running and ready for connections on port ${port}`);

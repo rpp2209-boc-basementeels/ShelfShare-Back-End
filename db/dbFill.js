@@ -1,7 +1,7 @@
 const db = require('./index.js');
 
 /*
-The purpose of this file if so fill the tables that will be used by Orders
+The purpose of this file is to fill the tables that will be used by Orders
 To run the fill, enter node db/dbFill.js into the command line
 */
 
@@ -104,6 +104,43 @@ const ordersFill = async () => {
     console.log('ERROR adding to books TABLE', err);
   }
 
+    // REVIEWS
+    try {
+      await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('This book changed my life', '2023-05-13', 'Maddie', 2);`, []);
+    } catch (err) {
+      console.log('ERROR adding to reviews TABLE', err);
+    }
+  
+    try {
+      await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('You HAVE to read this book', '2023-05-13', 'CJ', 2);`, []);
+    } catch (err) {
+      console.log('ERROR adding to reviews TABLE', err);
+    }
+  
+    try {
+      await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('This book was lowkey kinda mid', '2023-05-13', 'Kevin', 8);`, []);
+    } catch (err) {
+      console.log('ERROR adding to reviews TABLE', err);
+    }
+  
+    try {
+      await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('My life will never be the same', '2023-05-13', 'Melodie', 8);`, []);
+    } catch (err) {
+      console.log('ERROR adding to reviews TABLE', err);
+    }
+  
+    try {
+      await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('I lost 120 pounds from the raw potatoes diet!', '2023-05-13', 'Guillermo', 3);`, []);
+    } catch (err) {
+      console.log('ERROR adding to reviews TABLE', err);
+    }
+  
+    try {
+      await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('I never finished it I never finished it I never finished it ...', '2023-05-13', 'Fig', 10);`, []);
+    } catch (err) {
+      console.log('ERROR adding to reviews TABLE', err);
+    }
+
   // AUTHORS
   try {
     await db.query(`INSERT INTO authors(author, isbn)
@@ -191,49 +228,49 @@ const ordersFill = async () => {
 
   // USERS
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, address)
     VALUES('CJ', 'https://ca.slack-edge.com/T5B2RG0JW-U040DL9H830-0319ac0c5fd2-512',
-        'iodized','cje@basementeels.com', 'CJ', 'Edgecomb', 'Male', 30, false);`, []);
+        'iodized','cje@basementeels.com', 'CJ', 'Edgecomb', 'Male', 30, false, '123 Fake Name Road, San Francisco, CA 12345');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, address)
     VALUES('Fig', 'https://ca.slack-edge.com/T5B2RG0JW-U040YT1BP0R-b0628c810199-512',
-        'NaCl','figf@basementeels.com', 'Fig', 'Fishkin', 'Nonbinary', 31, false);`, []);
+        'NaCl','figf@basementeels.com', 'Fig', 'Fishkin', 'Nonbinary', 31, false, '123 Fake Name Road, San Francisco, CA 12345');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, address)
     VALUES('Guillermo', 'https://ca.slack-edge.com/T5B2RG0JW-U040YT1QW4R-6f9c4085cf0a-512',
-        'kosher','guillermoh@basementeels.com', 'Guillermo', 'Hasbun', 'Male', 30, false);`, []);
+        'kosher','guillermoh@basementeels.com', 'Guillermo', 'Hasbun', 'Male', 30, false, '123 Fake Name Road, San Francisco, CA 12345');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, address)
     VALUES('Kevin', 'https://ca.slack-edge.com/T5B2RG0JW-U040H9K99PF-61233b562bc7-512',
-        'sea','kevinh@basementeels.com', 'Kevin', 'Hoang', 'Male', 27, false);`, []);
+        'sea','kevinh@basementeels.com', 'Kevin', 'Hoang', 'Male', 27, false, '123 Fake Name Road, San Francisco, CA 12345');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, address)
     VALUES('Maddie', 'https://ca.slack-edge.com/T5B2RG0JW-U040YT26J7K-2da0836f9cf2-512',
-        'Himalayan','maddies@basementeels.com', 'Maddie', 'Sime', 'Female', 25, false);`, []);
+        'Himalayan','maddies@basementeels.com', 'Maddie', 'Sime', 'Female', 25, false, '123 Fake Name Road, San Francisco, CA 12345');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library)
+    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, address)
     VALUES('Melodie', 'https://ca.slack-edge.com/T5B2RG0JW-U0419V6991N-4d7104282844-512',
-        'flaked','melodiep@basementeels.com', 'Melodie', 'Peck', 'Female', 30, false);`, []);
+        'flaked','melodiep@basementeels.com', 'Melodie', 'Peck', 'Female', 30, false, '123 Fake Name Road, San Francisco, CA 12345');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
@@ -527,14 +564,14 @@ try {
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(14, 8, 7, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(14, 8, 7, '2023-05-06', '2023-07-06', true, false);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(15, 8, 7, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(15, 8, 7, '2023-05-06', '2023-07-06', false, true);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
@@ -548,14 +585,14 @@ try {
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(17, 7, 8, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(17, 7, 8, '2023-05-06', '2023-07-06', true, false);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
 
 try {
   await db.query(`INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-    VALUES(18, 7, 8, '2023-05-06', '2023-07-06', false, false);`, []);
+    VALUES(18, 7, 8, '2023-05-06', '2023-07-06', false, true);`, []);
 } catch (err) {
   console.log('ERROR adding to users TABLE', err);
 }
