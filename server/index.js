@@ -13,9 +13,8 @@ const libraryRouter = require('./routes/libraryRouter.js');
 const orders = require('./routes/orders.js');
 const authorization = require('./routes/authorization.js');
 const homepageRouter = require('./routes/homepageRouter.js');
+const usageRouter = require('./routes/usage.js');
 const profileRouter = require('./routes/profileRouter.js');
-// console.log(libraryRouter);
-// console.log(authorization);
 
 const app = express();
 app.use(express.json());
@@ -39,6 +38,8 @@ app.use(authorization);
 app.use(homepageRouter);
 
 app.use(orders);
+
+app.use(usageRouter);
 
 app.use(profileRouter);
 
