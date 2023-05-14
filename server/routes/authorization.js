@@ -22,9 +22,11 @@ router.get('/email', (req, res) => {
 });
 
 router.patch('/updateSaltHash', (req, res) => {
-  const salt = generator.generatorSalt(req.cookies.g_state);
-  const hash = generator.generatorHash(req.cookies.g_state, salt);
-  const whereObj = req.body;
+  const email = { email: req.body.email };
+  const cookies = { ...req.body.cookies };
+  const salt = generator.generatorSalt(cookies.g_state);
+  const hash = generator.generatorHash(cookies.g_state, salt);
+  const whereObj = email;
   const setSaltObj = { salt: salt };
   const setHashObj = { hash: hash };
   dbQuery.updateTable('users', whereObj, setSaltObj, (err, data) => {
