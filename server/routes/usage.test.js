@@ -1,17 +1,22 @@
-// const axios = require('axios');
-// const urlPrefix = '//localhost:8080';
+const axios = require('axios');
+const urlPrefix = '//localhost:8080';
 
-// describe('Usage route unit tests', () => {
+describe('Usage route unit tests', () => {
 
-//   test('books usage endpoint exists and returns a response', async () => {
-//     const ping = await axios.get(`${urlPrefix}/usage/books/`);
-//     expect(ping.status).toBeDefined();
-//   })
+  test('sample test', () => {
+    expect(true).toBe(true);
+  })
 
-//   test('genre trends usage endpoint exists and returns a response', async () => {
-//     const ping = await axios.get(`${urlPrefix}/usage/genre/`);
-//     expect(ping.status).toBeDefined();
-//   })
+  // commented out tests are a work in progress
+  // test('books usage endpoint exists and returns a response', async () => {
+  //   const ping = await axios.get(`${urlPrefix}/usage/books/`);
+  //   expect(ping.status).toBeDefined();
+  // })
 
-// })
+  // test('genre trends usage endpoint exists and returns a response', async () => {
+  //   const ping = await axios.get(`${urlPrefix}/usage/genre/`);
+  //   expect(ping.status).toBeDefined();
+  // })
+
+})
 
