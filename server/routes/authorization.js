@@ -21,32 +21,94 @@ router.get('/email', (req, res) => {
   })
 });
 
-router.patch('/updateSaltHash', (req, res) => {
-  const salt = generator.generatorSalt(req.cookies.g_state);
-  const hash = generator.generatorHash(req.cookies.g_state, salt);
-  const whereObj = req.body;
-  const setSaltObj = { salt: salt };
-  const setHashObj = { hash: hash };
-  dbQuery.updateTable('users', whereObj, setSaltObj, (err, data) => {
+router.get('/sessions', (req, res) => {
+  const hashObj = {
+    hash: generator.generateHashSession(req.query.g_state),
+  }
+  dbQuery.checkTable('sessions', hashObj, (err, data) => {
     if (err) {
-      res.status(500).send('1');
+      res.status(500).send(err);
     } else {
-      dbQuery.getID('users', whereObj, (err, data) => {
+      // if there is no hash then user does not exist, send back empty data
+      if (data.length === 0) {
+        res.status(200).send(data);
+      } else {
+        // if there is hash data then return the user's information
+        const userID = { user_id: data[0].user_id };
+        dbQuery.checkTable('users', userID, (err, data) => {
+          res.status(200).send(data);
+        });
+      }
+    }
+  })
+});
+
+router.delete('/sessions', (req, res) => {
+  const hashObj = {
+    hash: generator.generateHashSession(req.body.g_state),
+  };
+  dbQuery.deleteFromTable('sessions', hashObj, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  })
+});
+
+router.put('/updateHash', (req, res) => {
+  const email = { email: req.body.email };
+  const cookies = { ...req.body.cookies };
+  const hash = generator.generateHashSession(cookies.g_state);
+  const whereObj = email;
+  const setHashObj = { hash: hash };
+  dbQuery.getID('users', whereObj, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      const result = {
+        user_id: data[0].user_id
+      };
+      // check the sessions table to see if there is a user id that exists
+      dbQuery.checkTable('sessions', result, (err, data) => {
         if (err) {
-          res.status(500).send('2');
+          res.status(500).send(err);
         } else {
-          const result = {
-            user_id: data[0].user_id
-          };
-          dbQuery.updateTable('sessions', result, setHashObj, (err, data) => {
-            if (err) {
-              res.status(500).send('3');
-            } else {
-              res.status(200).send('Salt and hash have been updated!')
-            }
-          })
+          if (data[0]) { // if a user exists then update
+            dbQuery.updateTable('sessions', result, hashObj, (err, data) => {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                dbQuery.checkTable('users', result, (err, data) => {
+                  if (err) {
+                    res.status(500).send(err);
+                  } else {
+                    res.status(200).send(data);
+                  }
+                })
+              }
+            })
+          } else { // if a user does not exists then add
+            const result2 = {
+              ...result,
+              hash: hash,
+            };
+            dbQuery.addToTable('sessions', result2, (err, data) => {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                dbQuery.checkTable('users', result, (err, data) => {
+                  if (err) {
+                    res.status(500).send(err);
+                  } else {
+                    res.status(200).send(data);
+                  }
+                })
+              }
+            })
+          }
         }
-      })
+      });
     }
   })
 });
@@ -81,10 +143,6 @@ router.post('/newUser', (req, res) => {
     }
   });
 });
-
-router.get('/asdf', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/dist/index.html'));
-})
 
 router.get('/username', (req, res) => {
   dbQuery.checkTable('users', req.query, (err, data) => {
