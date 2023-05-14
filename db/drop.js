@@ -8,7 +8,7 @@ const db = require('./index.js');
 const rebuildDatabase = async () => {
   // drop all tables on the current database
   try {
-    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors, users`, []);
+    await db.query(`DROP TABLE IF EXISTS reviews, book_ownerships, borrowed_books, sessions, books, authors, users, usage`, []);
   } catch (err) {
     console.log('ERROR DROPPING EXISTING TABLES');
   }
@@ -51,8 +51,9 @@ const rebuildDatabase = async () => {
       first_name text NOT NULL,
       last_name text NOT NULL,
       gender text NOT NULL,
-      age text NOT NULL,
-      is_library boolean NOT NULL
+      age integer NOT NULL,
+      is_library boolean NOT NULL,
+      address text
     )`, []);
   } catch (err) {
     console.log('ERROR CREATING users TABLE', err);
@@ -63,10 +64,9 @@ const rebuildDatabase = async () => {
     await db.query(`CREATE TABLE reviews (
       review_id serial PRIMARY KEY,
       body text NOT NULL,
-      title text NOT NULL,
       review_date date NOT NULL,
-      book_id integer REFERENCES books(book_id),
-      user_id integer REFERENCES users(user_id)
+      username text NOT NULL,
+      book_id integer REFERENCES books(book_id)
     )`, []);
   } catch (err) {
     console.log('ERROR CREATING reviews TABLE', err);
@@ -110,7 +110,23 @@ const rebuildDatabase = async () => {
   } catch (err) {
     console.log('ERROR CREATING sessions TABLE', err);
   }
+
+  // USAGE
+  try {
+    await db.query(`CREATE TABLE usage (
+      transaction_id serial PRIMARY KEY,
+      isbn bigint NOT NULL,
+      user_age integer NOT NULL,
+      user_gender text NOT NULL,
+      book_genre text NOT NULL,
+      transaction_date date NOT NULL
+    )`, []);
+  } catch (err) {
+    console.log('ERROR CREATING usage TABLE', err);
+  }
 }
+
+
 
 // invoke the above function
 rebuildDatabase();

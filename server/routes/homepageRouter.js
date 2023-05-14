@@ -19,6 +19,21 @@ homepageRouter.get('/trending', async (req, res) => {
   }
 })
 
+homepageRouter.get('/detail', async (req, res) => {
+  const bookId = req.query.bookId;
+  console.log('bookId - backend', bookId);
+  try {
+    let oneBook = await db.query(
+      'SELECT * FROM books WHERE book_id = $1',
+      [bookId]
+    );
+    res.status(200).send(oneBook.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error retrieving book');
+  }
+})
+
 // EXAMPLE BELOW
 
 // router.get('/:id', async (req, res) => {
