@@ -19,6 +19,7 @@ let sendSort = (obj) => {
   for (var i = 0; i < obj.loaned.length; i++) {
     let loanedBook = obj.loaned[i];
     if (loanedBook.shipped_to_borrower === false && loanedBook.shipped_to_owner === false) {
+      loanedBook.type = 'Loaned'
       clean.pending.push(loanedBook);
     } else {
       clean.loaned.push(loanedBook)
@@ -28,6 +29,7 @@ let sendSort = (obj) => {
   for (var j = 0; j < obj.borrowed.length; j++) {
     let borrowedBook = obj.borrowed[j];
     if (borrowedBook.shipped_to_borrower === false && borrowedBook.shipped_to_owner === false) {
+      borrowedBook.type = 'Borrowed'
       clean.pending.push(borrowedBook);
     } else {
       clean.borrowed.push(borrowedBook)
