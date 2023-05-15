@@ -51,5 +51,15 @@ profileRouter.post('/personalInformation/:username', async (req, res) => {
     }
 });
 
+profileRouter.get('/public/:username', async (req, res) => {
+    var username = req.params.username;
+    try {
+        const publicInfo = await db.query(`SELECT first_name, last_name, photo_url FROM users WHERE username = '${username}'`);
+        res.status(200).send(publicInfo.rows);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 module.exports = profileRouter;
 
