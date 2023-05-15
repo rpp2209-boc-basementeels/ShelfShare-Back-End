@@ -26,4 +26,21 @@ const generatorHash = (cookie, salt) => {
   return result;
 };
 
-module.exports = { generatorSalt, generatorHash };
+const generateHashSession = (cookie) => {
+  var result = '';
+  const alphabet = 'qwertyuiopasdfghjklzxcvbnm';
+  const num = '10293847456';
+  for (let i = 0; i < cookie.length; i++) {
+    result += cookie[i];
+    if (i % 2 === 0) {
+      result += num[i];
+    } else {
+      result += alphabet[i];
+    }
+  }
+  return result;
+}
+
+generateHashSession('asdf')
+
+module.exports = { generatorSalt, generatorHash, generateHashSession };

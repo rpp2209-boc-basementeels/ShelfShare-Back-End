@@ -17,7 +17,7 @@ profileRouter.get('/personalInformation/:username', async (req, res) => {
     try {
         const userInfo = await db.query(`SELECT username, photo_url, email, first_name, last_name, gender, age, is_library, address FROM users WHERE username = '${username}'`);
         res.status(200).send(userInfo.rows);
-    } catch {
+    } catch (error) {
         res.status(500).send(error);
     }
 });
