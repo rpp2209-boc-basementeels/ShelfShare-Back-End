@@ -386,7 +386,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('PostgreSQL for dummies', '2022-09-01', 'Educational',
-        'https://bit.ly/3pgkvxA', 9000000000001);`, []);
+        'https://www.zdnet.com/a/img/2018/04/19/092cbf81-acac-4f3a-91a1-5a26abc1721f/postgresql-logo.png', 9000000000001);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
@@ -394,7 +394,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('Express: That was quick', '2022-09-01', 'Educational',
-        'https://bit.ly/3pgkvxA', 9000000000002);`, []);
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVKZVuthQW1gBwNpXAgoC-pu91dTJMZWx26Q&usqp=CAU', 9000000000002);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
@@ -402,7 +402,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('Redux: A Greate State of Mind', '2022-09-01', 'Fiction',
-        'https://bit.ly/3pgkvxA', 9000000000003);`, []);
+        'https://www.educative.io/cdn-cgi/image/f=auto,fit=contain,w=600/api/page/5186775737696256/image/download/6611525209948160', 9000000000003);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
@@ -410,7 +410,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('Cookies: from Parsing to Ovens', '2022-09-01', 'Cooking',
-        'https://bit.ly/3pgkvxA', 9000000000004);`, []);
+        'https://c.tadst.com/gfx/600x337/cookies.png?1', 9000000000004);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
@@ -418,7 +418,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('What I learned in boating school is...', '2022-09-01', 'Biography',
-        'https://bit.ly/3pgkvxA', 9000000000005);`, []);
+        'https://thenewswheel.com/wp-content/uploads/2017/07/Spongebob-Boating.jpg', 9000000000005);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
@@ -426,7 +426,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Rise and Fall of Limewire', '2022-09-01', 'Non-Fiction',
-        'https://bit.ly/3pgkvxA', 9000000000006);`, []);
+        'https://img.youtube.com/vi/gn29O6hvIGs/0.jpg', 9000000000006);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
