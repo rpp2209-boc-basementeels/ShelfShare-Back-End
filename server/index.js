@@ -21,13 +21,13 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../ShelfShare-2/public/dist/index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../../ShelfShare-2/public/dist/index.html'));
+// });
 
-app.get('/bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../ShelfShare-2/public/dist/bundle.js'));
-});
+// app.get('/bundle.js', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../../ShelfShare-2/public/dist/bundle.js'));
+// });
 
 // instruct express to use your imported routes for any requests to a relevant endpoint
 // EXAMPLE ---> app.use('/products', products);
