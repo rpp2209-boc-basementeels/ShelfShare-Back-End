@@ -53,7 +53,12 @@ const rebuildDatabase = async () => {
       gender text NOT NULL,
       age integer NOT NULL,
       is_library boolean NOT NULL,
-      address text
+      line_1 text NOT NULL,
+      line_2 text,
+      city text NOT NULL,
+      state text NOT NULL,
+      postal text NOT NULL,
+      country text NOT NULL
     )`, []);
   } catch (err) {
     console.log('ERROR CREATING users TABLE', err);

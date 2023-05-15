@@ -81,10 +81,16 @@ const updateTable = (table, whereObj, setObj, callback) => {
     .catch(err => callback(err));
 };
 
+const deleteFromTable = (table, obj, callback) => {
+  db.query(`DELETE FROM ${table} ${constructWhere(obj)};`)
+    .then(data => callback(null, data))
+    .catch(err => callback(err));
+};
+
 const getID = (table, obj, callback) => {
   db.query(`SELECT user_id FROM ${table} ${constructWhere(obj)};`)
     .then(data => callback(null, data.rows))
     .catch(err => callback(err));
 };
 
-module.exports = { checkTable, addToTable, updateTable, getID }
+module.exports = { checkTable, addToTable, updateTable, getID, deleteFromTable }
