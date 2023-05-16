@@ -7,7 +7,8 @@
     "test": "jest --verbose --detectOpenHandles",
     "server-dev": "npx nodemon --watch server server/index.js",
     "start": "node server/index.js",
-    "restart-tables": "node db/drop.js"
+    "restart-tables": "node db/drop.js",
+    "fill-tables": "node db/dbFill.js"
   },
   "repository": {
     "type": "git",
