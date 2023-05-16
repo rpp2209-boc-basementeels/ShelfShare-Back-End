@@ -60,7 +60,6 @@ const constructSet = (obj) => {
       result += ', ';
     }
   }
-  return result;
 };
 
 const checkTable = (table, obj, callback) => {
