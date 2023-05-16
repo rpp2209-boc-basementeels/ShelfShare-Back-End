@@ -65,8 +65,8 @@ orders.get('/orders/:user_id', async (req, res) => {
     .catch((err) => { res.sendStatus(500); console.log(err); throw err; });
   })
 
-  orders.patch('/orders', async (req, res) => {
-
+  orders.patch('/orders/:user_id', async (req, res) => {
+    console.log(req.params)
   })
 
 // export router to import on server file
