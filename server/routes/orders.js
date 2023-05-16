@@ -8,6 +8,10 @@ const orders = new Router();
 //pending helper function
 // this takes in an object, splits it into valid and pending orders
 let sendSort = (obj) => {
+  // edge case
+  if (obj === undefined) {
+    return [];
+  }
   //obj.loaned and obj.borrowed are arrays of obj
   var clean = {
     loaned: [],
@@ -46,14 +50,14 @@ orders.get('/orders/:user_id', async (req, res) => {
   (select json_agg(o) as loaned
    from (select borrow_date, return_date, shipped_to_borrower, shipped_to_owner, (
   (select json_agg(d) as details
-   from (select author, title from authors INNER JOIN books ON authors.isbn = books.isbn
+   from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
     where books.book_id = borrowed_books.book_id) as d))
     from borrowed_books where owner_id = ${user}) as o),
 
   (select json_agg(b) as borrowed
    from (select borrow_date, return_date, shipped_to_borrower, shipped_to_owner, (
   (select json_agg(d) as details
-   from (select author, title from authors INNER JOIN books ON authors.isbn = books.isbn
+   from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
     where books.book_id = borrowed_books.book_id) as d))
     from borrowed_books where borrower_id = ${user}) as b)
 
@@ -65,7 +69,7 @@ orders.get('/orders/:user_id', async (req, res) => {
     .catch((err) => { res.sendStatus(500); console.log(err); throw err; });
   })
 
-  orders.patch('/orders/:user_id', async (req, res) => {
+  orders.patch('/orders/:user_id/:isbn', async (req, res) => {
     console.log(req.params)
   })
 
