@@ -270,7 +270,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
     VALUES('Melodie', 'https://ca.slack-edge.com/T5B2RG0JW-U0419V6991N-4d7104282844-512',
-        'flaked','melodiep@basementeels.com', 'Melodie', 'Peck', 'Female', 30, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
+        'flaked','melodiep@basementeels.com', 'Melodie', 'Peck', 'Female', 30, true, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
