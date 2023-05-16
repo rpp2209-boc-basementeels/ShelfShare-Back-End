@@ -21,18 +21,46 @@ homepageRouter.get('/trending', async (req, res) => {
 
 homepageRouter.get('/detail', async (req, res) => {
   const bookId = req.query.bookId;
-  console.log('bookId - backend', bookId);
-  try {
-    let oneBook = await db.query(
-      'SELECT * FROM books WHERE book_id = $1',
-      [bookId]
-    );
-    res.status(200).send(oneBook.rows);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send('Error retrieving book');
-  }
+  let results = {};
+  db.query(
+    'SELECT * FROM books WHERE book_id = $1',
+    [bookId]
+  )
+  .then((bookResults) => {
+    //save returned books in result object
+    results['books'] = bookResults.rows;
+    let isbn = bookResults.rows[0].isbn;
+    //grab authors from authors table
+    db.query(
+      'SELECT * FROM authors WHERE isbn = $1',
+      [isbn]
+    )
+    .then((authorResults) => {
+      results['authors'] = authorResults.rows;
+      res.status(200).send(results);
+    })
+    .catch((err) => {
+      res.status(500).send('Error retrieving book');
+    })
+  })
 })
+
+homepageRouter.get('/search', async (req, res) => {
+  const rawTerm = req.query.term;
+  const term = rawTerm.toLowerCase();
+
+//first get the ids of matching books from books table
+  db.query(
+    `SELECT book_id FROM books WHERE POSITION('${term}' IN lower(title))>0`
+  )
+  .then((results) => {
+    //then iterate over those results
+    res.status(200).send(results.rows);
+  })
+  .catch((err) => {
+    res.status(500).send('Error retrieving book');
+  })
+});
 
 // EXAMPLE BELOW
 
