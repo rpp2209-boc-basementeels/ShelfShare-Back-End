@@ -114,7 +114,7 @@ router.put('/updateHash', (req, res) => {
 });
 
 router.post('/newUser', (req, res) => {
-  const {cookies} = req.body;
+  const { cookies } = req.body;
   delete req.body.cookies;
   const salt = generator.generatorSalt(cookies.g_state);
   const hash = generator.generateHashSession(cookies.g_state);
@@ -136,7 +136,7 @@ router.post('/newUser', (req, res) => {
           if (err) {
             res.status(500).send(err);
           } else {
-            res.redirect(301, '/');
+            res.status(200).send('User added!');
           }
         })
 
