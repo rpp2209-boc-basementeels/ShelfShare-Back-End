@@ -32,5 +32,34 @@ profileRouter.get('/bookReviews/:book_id', async (req, res) => {
     }
 });
 
+profileRouter.post('/personalInformation/:username', async (req, res) => {
+    var username = req.params.username;
+    if (req.body.line2 !== null) {
+        try {
+            const updatedInfo = await db.query(`UPDATE users SET email = '${req.body.email}', first_name = '${req.body.firstName}', last_name = '${req.body.lastName}', gender = '${req.body.gender}', age = ${req.body.age}, line_1 = '${req.body.line1}', line_2 = '${req.body.line2}', city = '${req.body.city}', state = '${req.body.state}', postal = '${req.body.postal}', country = '${req.body.country}' WHERE username = '${username}'`);
+            res.sendStatus(201);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    } else if (req.body.line2 === null || req.body.line2 === '') {
+        try {
+            const updatedInfo = await db.query(`UPDATE users SET email = '${req.body.email}', first_name = '${req.body.firstName}', last_name = '${req.body.lastName}', gender = '${req.body.gender}', age = ${req.body.age}, line_1 = '${req.body.line1}', line_2 = null, city = '${req.body.city}', state = '${req.body.state}', postal = '${req.body.postal}', country = '${req.body.country}' WHERE username = '${username}'`);
+            res.sendStatus(201);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }
+});
+
+profileRouter.get('/public/:username', async (req, res) => {
+    var username = req.params.username;
+    try {
+        const publicInfo = await db.query(`SELECT first_name, last_name, photo_url FROM users WHERE username = '${username}'`);
+        res.status(200).send(publicInfo.rows);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 module.exports = profileRouter;
 
