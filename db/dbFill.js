@@ -228,49 +228,49 @@ const ordersFill = async () => {
 
   // USERS
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
+    await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
     VALUES('CJ', 'https://ca.slack-edge.com/T5B2RG0JW-U040DL9H830-0319ac0c5fd2-512',
-        'iodized','cje@basementeels.com', 'CJ', 'Edgecomb', 'Male', 30, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
+        'cje@basementeels.com', 'CJ', 'Edgecomb', 'Male', 30, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
+    await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
     VALUES('Fig', 'https://ca.slack-edge.com/T5B2RG0JW-U040YT1BP0R-b0628c810199-512',
-        'NaCl','figf@basementeels.com', 'Fig', 'Fishkin', 'Nonbinary', 31, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
+        'figf@basementeels.com', 'Fig', 'Fishkin', 'Nonbinary', 31, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
+    await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
     VALUES('Guillermo', 'https://ca.slack-edge.com/T5B2RG0JW-U040YT1QW4R-6f9c4085cf0a-512',
-        'kosher','guillermoh@basementeels.com', 'Guillermo', 'Hasbun', 'Male', 30, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
+        'guillermoh@basementeels.com', 'Guillermo', 'Hasbun', 'Male', 30, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
+    await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
     VALUES('Kevin', 'https://ca.slack-edge.com/T5B2RG0JW-U040H9K99PF-61233b562bc7-512',
-        'sea','kevinh@basementeels.com', 'Kevin', 'Hoang', 'Male', 27, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
+        'kevinh@basementeels.com', 'Kevin', 'Hoang', 'Male', 27, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
+    await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
     VALUES('Maddie', 'https://ca.slack-edge.com/T5B2RG0JW-U040YT26J7K-2da0836f9cf2-512',
-        'Himalayan','maddies@basementeels.com', 'Maddie', 'Sime', 'Female', 25, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
+        'maddies@basementeels.com', 'Maddie', 'Sime', 'Female', 25, false, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
 
   try {
-    await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
+    await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library, line_1, line_2, city, state, postal, country)
     VALUES('Melodie', 'https://ca.slack-edge.com/T5B2RG0JW-U0419V6991N-4d7104282844-512',
-        'flaked','melodiep@basementeels.com', 'Melodie', 'Peck', 'Female', 30, true, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
+        'melodiep@basementeels.com', 'Melodie', 'Peck', 'Female', 30, true, '123 Rainbow Road', null, 'Brooklyn', 'NY', '12345', 'United States');`, []);
   } catch (err) {
     console.log('ERROR adding to users TABLE', err);
   }
