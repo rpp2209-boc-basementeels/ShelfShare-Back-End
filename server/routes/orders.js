@@ -81,14 +81,8 @@ orders.patch('/pending/loan', async (req, res) => {
 })
 
 //  this route confirms shipping from borrower to owner
-orders.patch('/pending/borrow', async (req, res) => {
-  let user = req.body.user_id;
-  let book = req.body.book_id;
-  client.query(`
-    UPDATE borrowed_books SET shipped_to_owner = NOT false WHERE borrower_id = ${user} and book_id = ${book};
-`)
-    .then(pass => res.sendStatus(200))
-    .catch((err) => { console.log(err); res.sendStatus(500) })
+orders.post('/borrow', async (req, res) => {
+  console.log(req)
 })
 
 // export router to import on server file
