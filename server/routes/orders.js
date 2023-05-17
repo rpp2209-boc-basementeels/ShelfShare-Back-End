@@ -82,7 +82,17 @@ orders.patch('/pending/loan', async (req, res) => {
 
 //  this route confirms shipping from borrower to owner
 orders.post('/borrow', async (req, res) => {
-  console.log(req)
+  // console.log(req)
+  var testBook = 19;
+  var testBorrow = 8;
+  var testOwn = 7;
+
+  client.query(`
+  INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+  VALUES(${testBook}, ${testBorrow}, ${testOwn}, '2023-05-06', '2023-07-06', false, false)
+  `)
+  .then(pass => res.sendStatus(200))
+  .catch((err) => { console.log(err); res.send(err).status(500) })
 })
 
 // export router to import on server file
