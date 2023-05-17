@@ -405,20 +405,20 @@ const ordersFill = async () => {
   /////////////////////////////////////////////////////////////////////////////////////
     // Order's testing functionality
     try {
-      await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library,
+      await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library,
         line_1, line_2, city, state, postal, country)
       VALUES('Test1', 'https://cdn.slidesharecdn.com/ss_thumbnails/test1-190307023259-thumbnail.jpg?w=3840&q=90',
-          'salty','test1@test.com', 'Test1', 'Test1Last', 'Male', 30, false,
+          'test1@test.com', 'Test1', 'Test1Last', 'Male', 30, false,
           '9876 That Avenue', 'null', 'Port St. Lucie', 'FL', '34945', 'United States');`, []);
     } catch (err) {
       console.log('ERROR adding to users TABLE', err);
     }
 
     try {
-      await db.query(`INSERT INTO users(username, photo_url, salt, email, first_name, last_name, gender, age, is_library,
+      await db.query(`INSERT INTO users(username, photo_url, email, first_name, last_name, gender, age, is_library,
         line_1, line_2, city, state, postal, country)
       VALUES('Test2', 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Test2_de_Liverc.png',
-          'salado','test2@test.com', 'Test2', 'Test2Last', 'Male', 30, false,
+          'test2@test.com', 'Test2', 'Test2Last', 'Male', 30, false,
           '1234 This Street', 'Apartment 1', 'Miami', 'FL', '33125', 'United States');`, []);
     } catch (err) {
       console.log('ERROR adding to users TABLE', err);
