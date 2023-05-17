@@ -46,7 +46,6 @@ const rebuildDatabase = async () => {
       user_id serial PRIMARY KEY,
       username text NOT NULL,
       photo_url text,
-      salt text NOT NULL,
       email text NOT NULL,
       first_name text NOT NULL,
       last_name text NOT NULL,
