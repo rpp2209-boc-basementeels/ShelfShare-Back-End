@@ -10,7 +10,8 @@ const homepageRouter = new Router();
 homepageRouter.get('/trending', async (req, res) => {
   try {
     let bookData = await db.query(
-      'SELECT * FROM books'
+      `SELECT * FROM books
+    FULL JOIN authors ON books.isbn = authors.isbn`
     );
     res.status(200).send(bookData.rows);
   } catch (error) {
@@ -46,12 +47,13 @@ homepageRouter.get('/detail', async (req, res) => {
 })
 
 homepageRouter.get('/search', async (req, res) => {
-  const rawTerm = req.query.term;
-  const term = rawTerm.toLowerCase();
+  // const rawTerm = req.query.term;
+  // const term = rawTerm.toLowerCase();
 
 //first get the ids of matching books from books table
   db.query(
-    `SELECT book_id FROM books WHERE POSITION('${term}' IN lower(title))>0`
+    `SELECT * FROM books
+    FULL JOIN authors ON books.isbn = authors.isbn`
   )
   .then((results) => {
     //then iterate over those results

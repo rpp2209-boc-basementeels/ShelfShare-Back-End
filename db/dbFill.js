@@ -35,7 +35,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Krabby Patty Secret Formula', '2022-09-01', 'Cooking',
-        'https://bit.ly/3HJNNuX', 3333333333333);`, []);
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwZDbZ2tP0986cP8WmbPoTC7o_z5KcNHVeyQ&usqp=CAU', 3333333333333);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
@@ -75,7 +75,7 @@ const ordersFill = async () => {
   try {
     await db.query(`INSERT INTO books(title, pub_date, genre, image_url, isbn)
     VALUES('The Art of Closing a Real Estate Deal', '2022-09-01', 'Self Help',
-        'https://www.linkedin.com/in/knhoangre/', 8888888888888);`, []);
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeG-OgF0ohU8CZzbM0yNGUODMO7vwIkhZLHEXfOwwL9uDjabDxduTntK_H320UTRb0EcA&usqp=CAU', 8888888888888);`, []);
   } catch (err) {
     console.log('ERROR adding to books TABLE', err);
   }
