@@ -80,21 +80,22 @@ orders.patch('/pending/loan', async (req, res) => {
     .catch((err) => { console.log(err); res.sendStatus(500) })
 })
 
+orders.patch('/pending/borrow', async (req, res) => {
+  let user = req.body.user_id;
+  let book = req.body.book_id;
+  client.query(`
+    UPDATE borrowed_books SET shipped_to_owner = NOT false WHERE borrower_id = ${user} and book_id = ${book};
+`)
+    .then(pass => res.sendStatus(200))
+    .catch((err) => { console.log(err); res.sendStatus(500) })
+})
+
 //  this route confirms shipping from borrower to owner
 orders.post('/borrow', async (req, res) => {
   // console.log(req)
   var testBook = 19;
   var testBorrow = 8;
   var testOwn = 7;
-  /*
-  client.query(`
-    UPDATE book_ownerships SET is_available = NOT true WHERE user_id = ${testOwn} and book_id = ${testBook};
-    `)
-
-
-    UPDATE table SET boolean_field = NOT boolean_field WHERE id = :id
-`)
-  */
 
   client.query(`
   INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
