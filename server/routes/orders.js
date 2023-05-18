@@ -81,14 +81,35 @@ orders.patch('/pending/loan', async (req, res) => {
 })
 
 //  this route confirms shipping from borrower to owner
-orders.patch('/pending/borrow', async (req, res) => {
-  let user = req.body.user_id;
-  let book = req.body.book_id;
+orders.post('/borrow', async (req, res) => {
+  // console.log(req)
+  var testBook = 19;
+  var testBorrow = 8;
+  var testOwn = 7;
+  /*
   client.query(`
-    UPDATE borrowed_books SET shipped_to_owner = NOT false WHERE borrower_id = ${user} and book_id = ${book};
+    UPDATE book_ownerships SET is_available = NOT true WHERE user_id = ${testOwn} and book_id = ${testBook};
+    `)
+
+
+    UPDATE table SET boolean_field = NOT boolean_field WHERE id = :id
 `)
-    .then(pass => res.sendStatus(200))
-    .catch((err) => { console.log(err); res.sendStatus(500) })
+  */
+
+  client.query(`
+  INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+  VALUES(${testBook}, ${testBorrow}, ${testOwn}, '2023-05-06', '2023-07-06', false, false)
+  `)
+  .then((pass) => {
+    client.query(`
+    UPDATE book_ownerships SET is_available = NOT true WHERE user_id = ${testOwn} and book_id = ${testBook};
+    `)
+    .then((switched) => {
+      res.sendStatus(200)
+    })
+    .catch((err) => {console.log('error inner', err); res.sendStatus(500)})
+  })
+  .catch((err) => { console.log(err); res.send(err).status(500) })
 })
 
 // export router to import on server file
