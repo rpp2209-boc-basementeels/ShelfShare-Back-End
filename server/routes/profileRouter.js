@@ -1,6 +1,7 @@
 const db = require('../../db/index.js');
 const Router = require('express-promise-router');
 const profileRouter = new Router();
+const moment = require ('moment');
 
 profileRouter.get('/reviews/:username', async (req, res) => {
     var username = req.params.username;
@@ -56,6 +57,17 @@ profileRouter.get('/public/:username', async (req, res) => {
     try {
         const publicInfo = await db.query(`SELECT first_name, last_name, photo_url, is_library FROM users WHERE username = '${username}'`);
         res.status(200).send(publicInfo.rows);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+profileRouter.post('/review/:book_id', async (req, res) => {
+    var book_id = req.params.book_id;
+    var data = req.body;
+    var date = moment(data.review_date).local().format('M-D-YYYY');
+    try {
+        const postReview = await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('${data.body}', '${date}', '${data.username}', ${book_id})`);
     } catch (error) {
         res.status(500).send(error);
     }
