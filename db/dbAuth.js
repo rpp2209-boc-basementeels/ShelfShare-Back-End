@@ -30,7 +30,11 @@ const constructValues = (obj) => {
 
     column += `${keys[i]}`;
     if (isNaN(obj[keys[i]]) === false) {
-      values += `${obj[keys[i]]}`;
+      if (obj[keys[i]] === '') {
+        values += `''`;
+      } else {
+        values += `${obj[keys[i]]}`;
+      }
     } else {
       values += `'${obj[keys[i]]}'`;
     }
