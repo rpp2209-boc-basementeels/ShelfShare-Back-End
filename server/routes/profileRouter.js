@@ -23,7 +23,7 @@ profileRouter.get('/personalInformation/:username', async (req, res) => {
 });
 
 profileRouter.get('/bookReviews/:book_id', async (req, res) => {
-    var book_id = req.params.username;
+    var book_id = req.params.book_id;
     try {
         const bookReviews = await db.query(`SELECT * FROM reviews WHERE book_id = ${book_id}`);
         res.status(200).send(bookReviews.rows);
@@ -33,7 +33,6 @@ profileRouter.get('/bookReviews/:book_id', async (req, res) => {
 });
 
 profileRouter.post('/personalInformation/:username', async (req, res) => {
-    console.log('req.body', req.body);
     var username = req.params.username;
     if (req.body.line2 !== null) {
         try {
