@@ -672,6 +672,21 @@ const ordersFill = async () => {
     console.log('ERROR adding to users TABLE', err);
   }
 
+  // usage table fills
+  try {
+    await db.query(`INSERT INTO usage(isbn, user_age, user_gender, book_genre, transaction_date)
+    VALUES($1, $2, $3, $4, $5);`, [9780316229241, 24, 'female', 'Fantasy', '2023-05-15']);
+  } catch (err) {
+    console.log('ERROR adding entry to usage table', err);
+  }
+
+  try {
+    await db.query(`INSERT INTO usage(isbn, user_age, user_gender, book_genre, transaction_date)
+    VALUES($1, $2, $3, $4, $5);`, [9780316229241, 65, 'non-binary', 'Fantasy', '2023-05-15']);
+  } catch (err) {
+    console.log('ERROR adding entry to usage table', err);
+  }
+
 }
 
 // invoke the above function
