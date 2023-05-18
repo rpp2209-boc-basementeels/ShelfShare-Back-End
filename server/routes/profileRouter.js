@@ -33,7 +33,6 @@ profileRouter.get('/bookReviews/:book_id', async (req, res) => {
 });
 
 profileRouter.post('/personalInformation/:username', async (req, res) => {
-    console.log('req.body', req.body);
     var username = req.params.username;
     if (req.body.line2 !== null) {
         try {
