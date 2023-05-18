@@ -77,11 +77,63 @@ usageRouter.get('/usage/books/', async (req, res) => {
 })
 
 usageRouter.get('/usage/genre/', async (req, res) => {
-  // TODO add query functionality for specifyng a time
-  // TODO add try/catch structure
+  // create some helpful aliases
   const demo = req.query.demo;
-  const option = req.query.option;
-  res.sendStatus(200);
+  const select = req.query.select;
+
+  // define package payload function
+  const packagePayload = async (array) => {
+    const payload = {};
+
+    const details = {
+      'genre': {}
+    }
+
+    for (entry of array) {
+      const genre = entry.book_genre;
+
+      if (!details.genre[genre]) {
+        details.genre[genre] = 1;
+      } else {
+        details.genre[genre]++;
+      }
+    }
+
+    payload[select] = details;
+
+    return payload;
+  }
+
+
+
+  if (demo === 'age') {
+    // isolate age range for use in query
+    let splitNums = select.split('-');
+    const low = Number(splitNums[0]);
+    const high = Number(splitNums[1]);
+
+    try {
+      // filter entries by the input age range
+      const borrowList = await db.query(`SELECT user_age, book_genre, transaction_date FROM usage WHERE user_age >= $1 AND user_age <= $2;`, [low, high]);
+      // package the payload
+      const payload = await packagePayload(borrowList.rows);
+      // send the payload
+      res.status(200).send(payload);
+    } catch (err) {
+      console.log('ERROR getting records in age range', err);
+    }
+  } else if (demo === 'gender') {
+    try {
+      // filter entries by input gender
+      const borrowList = await db.query(`SELECT user_gender, book_genre, transaction_date FROM usage WHERE user_gender = $1;`, [select]);
+      // package the payload
+      const payload = await packagePayload(borrowList.rows);
+      // send the payload
+      res.status(200).send(payload);
+    } catch (err) {
+      console.log('ERROR getting records by gender', err);
+    }
+  }
 })
 
 usageRouter.post('/usage/records', async (req, res) => {
