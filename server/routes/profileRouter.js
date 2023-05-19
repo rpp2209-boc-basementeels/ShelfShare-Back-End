@@ -66,7 +66,6 @@ profileRouter.get('/public/:username', async (req, res) => {
 profileRouter.post('/review/:book_id', async (req, res) => {
     var book_id = req.params.book_id;
     var data = req.body;
-    console.log('posting hehe');
     var date = moment(data.review_date).local().format('M-D-YYYY');
     try {
         const postReview = await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('${data.body}', '${date}', '${data.username}', ${book_id})`);
