@@ -5,68 +5,65 @@ const Router = require('express-promise-router');
 // create new router instance
 const orders = new Router();
 
-//pending helper function
-// this takes in an object, splits it into valid and pending orders
-let sendSort = (obj) => {
-  // edge case
-  if (obj === undefined) {
-    return [];
-  }
-  //obj.loaned and obj.borrowed are arrays of obj
-  var clean = {
-    loaned: [],
-    borrowed: [],
-    pending: []
-  };
 
-  // loaned books
-  for (var i = 0; i < obj.loaned.length; i++) {
-    let loanedBook = obj.loaned[i];
-    if (loanedBook.shipped_to_borrower === false && loanedBook.shipped_to_owner === false) {
-      loanedBook.type = 'Loaned'
-      clean.pending.push(loanedBook);
-    } else {
-      clean.loaned.push(loanedBook)
-    }
-  }
-  // borrowed books
-  for (var j = 0; j < obj.borrowed.length; j++) {
-    let borrowedBook = obj.borrowed[j];
-    if (borrowedBook.shipped_to_borrower === false && borrowedBook.shipped_to_owner === false) {
-      borrowedBook.type = 'Borrowed'
-      clean.pending.push(borrowedBook);
-    } else {
-      clean.borrowed.push(borrowedBook)
-    }
-  }
-  return clean;
-}
-
-orders.get('/orders/:user_id', async (req, res) => {
+orders.get('/orders/borrowed/:user_id', async (req, res) => {
   let user = req.params.user_id;
   client.query(`
-  select
-
-  (select json_agg(o) as loaned
-   from (select borrow_date, return_date, shipped_to_borrower, shipped_to_owner, (
+  select *,
   (select json_agg(d) as details
-   from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
-    where books.book_id = borrowed_books.book_id) as d))
-    from borrowed_books where owner_id = ${user}) as o),
-
-  (select json_agg(b) as borrowed
-   from (select borrow_date, return_date, shipped_to_borrower, shipped_to_owner, (
-  (select json_agg(d) as details
-   from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
-    where books.book_id = borrowed_books.book_id) as d))
-    from borrowed_books where borrower_id = ${user}) as b)
-
-   from borrowed_books where owner_id = ${user};
+    from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
+     where books.book_id = borrowed_books.book_id) as d)
+     from borrowed_books where (shipped_to_borrower = true or shipped_to_owner = true)
+     and borrower_id = ${user};
   `)
-    .then((orders) => {
-      res.send(sendSort(orders.rows[0])).status(200);
-    })
-    .catch((err) => { res.sendStatus(500); console.log(err); throw err; });
+  .then((data) => res.send(data.rows).status(201))
+  .catch(err => res.sendStatus(500))
+})
+
+orders.get('/orders/loaned/:user_id', async (req, res) => {
+  let user = req.params.user_id;
+  client.query(`
+  select *,
+  (select json_agg(d) as details
+    from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
+     where books.book_id = borrowed_books.book_id) as d)
+  from borrowed_books where (shipped_to_borrower = true or shipped_to_owner = true)
+  and owner_id = ${user};
+  `)
+  .then(data => res.send(data.rows).status(201))
+  .catch(err => console.log(err))
+})
+
+orders.get('/orders/pending/:user_id', async (req, res) => {
+  let user = req.params.user_id;
+  client.query(`
+  select *,
+  (select json_agg(d) as details
+    from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
+     where books.book_id = borrowed_books.book_id) as d)
+  from borrowed_books where owner_id = ${user}
+  and shipped_to_owner = false and shipped_to_borrower = false;
+  `)
+  .then((loaned) => {
+    var sendObj = {
+      pendingLoaned: loaned.rows
+    };
+    client.query(`
+  select *,
+  (select json_agg(d) as details
+    from (select * from authors INNER JOIN books ON authors.isbn = books.isbn
+     where books.book_id = borrowed_books.book_id) as d)
+  from borrowed_books where borrower_id = ${user}
+  and shipped_to_owner = false and shipped_to_borrower = false;
+  `)
+  .then((borrowed) => {
+    sendObj.pendingBorrowed = borrowed.rows;
+    console.log(sendObj)
+    res.send(sendObj).status(201)
+  })
+  .catch(err => res.sendStatus(500))
+  })
+  .catch(err => res.sendStatus(500))
 })
 
 //this route confirms shipping from owner to borrower
