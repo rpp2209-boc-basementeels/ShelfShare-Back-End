@@ -141,10 +141,12 @@ usageRouter.post('/usage/records', async (req, res) => {
   const isbn = req.body.isbn;
   const date = req.body.date;
   const genre = req.body.genre;
+  const gender = req.body.gender;
+  const age = req.body.age;
 
   try {
     const addRecord = await db.query(`INSERT INTO usage (isbn, user_age, user_gender, book_genre, transaction_date)
-    VALUES ($1, $2, $3, $4, $5)`, [isbn, 43, 'non-binary', genre, date]);
+    VALUES ($1, $2, $3, $4, $5)`, [isbn, age, gender, genre, date]);
     console.log(addRecord);
     res.sendStatus(201);
   } catch (error) {
