@@ -25,6 +25,7 @@ profileRouter.get('/personalInformation/:username', async (req, res) => {
 
 profileRouter.get('/bookReviews/:book_id', async (req, res) => {
     var book_id = req.params.book_id;
+    console.log('this endpoint was hit');
     try {
         const bookReviews = await db.query(`SELECT * FROM reviews WHERE book_id = ${book_id}`);
         res.status(200).send(bookReviews.rows);
@@ -68,6 +69,7 @@ profileRouter.post('/review/:book_id', async (req, res) => {
     var date = moment(data.review_date).local().format('M-D-YYYY');
     try {
         const postReview = await db.query(`INSERT INTO reviews (body, review_date, username, book_id) VALUES ('${data.body}', '${date}', '${data.username}', ${book_id})`);
+        res.status(200).send(postReview.rows);
     } catch (error) {
         res.status(500).send(error);
     }
