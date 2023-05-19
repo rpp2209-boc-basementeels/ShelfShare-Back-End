@@ -92,25 +92,29 @@ orders.patch('/pending/borrow', async (req, res) => {
 
 //  this route confirms shipping from borrower to owner
 orders.post('/borrow', async (req, res) => {
-  // console.log(req)
-  var testBook = 19;
-  var testBorrow = 8;
-  var testOwn = 7;
-
   client.query(`
-  INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
-  VALUES(${testBook}, ${testBorrow}, ${testOwn}, '2023-05-06', '2023-07-06', false, false)
-  `)
-  .then((pass) => {
-    client.query(`
-    UPDATE book_ownerships SET is_available = NOT true WHERE user_id = ${testOwn} and book_id = ${testBook};
+  select user_id from book_ownerships where book_id = ${req.body.book_id} and is_available = true;`)
+    .then((info) => {
+      if (info.rows.length === 0) { res.send('There are no books available to borrow').status(500); }
+      else {
+        var randomUser = ((info.rows)[Math.floor(Math.random() * (info.rows).length)]).user_id
+        client.query(`
+      INSERT INTO borrowed_books(book_id, borrower_id, owner_id, borrow_date, return_date, shipped_to_borrower, shipped_to_owner)
+      VALUES(${req.body.book_id}, ${req.body.borrower_id}, ${randomUser}, '2023-05-06', '2023-07-06', false, false);
+      `)
+          .then((pass) => {
+            client.query(`
+    UPDATE book_ownerships SET is_available = NOT true WHERE user_id = ${randomUser} and book_id = ${req.body.book_id};
     `)
-    .then((switched) => {
-      res.sendStatus(200)
+              .then((switched) => {
+                res.sendStatus(200)
+              })
+              .catch((err) => { console.log('error inner', err); res.sendStatus(500) })
+          })
+          .catch((err) => { console.log(err); res.send(err).status(500) })
+      }
     })
-    .catch((err) => {console.log('error inner', err); res.sendStatus(500)})
-  })
-  .catch((err) => { console.log(err); res.send(err).status(500) })
+    .catch(err => res.sendStatus(500))
 })
 
 // export router to import on server file
