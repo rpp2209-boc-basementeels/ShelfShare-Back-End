@@ -31,7 +31,7 @@ orders.get('/orders/loaned/:user_id', async (req, res) => {
   and owner_id = ${user};
   `)
   .then(data => res.send(data.rows).status(201))
-  .catch(err => console.log(err))
+  .catch(err => res.send(err).status(404))
 })
 
 orders.get('/orders/pending/:user_id', async (req, res) => {
@@ -58,7 +58,6 @@ orders.get('/orders/pending/:user_id', async (req, res) => {
   `)
   .then((borrowed) => {
     sendObj.pendingBorrowed = borrowed.rows;
-    console.log(sendObj)
     res.send(sendObj).status(201)
   })
   .catch(err => res.sendStatus(500))
@@ -103,9 +102,7 @@ orders.post('/borrow', async (req, res) => {
             client.query(`
     UPDATE book_ownerships SET is_available = NOT true WHERE user_id = ${randomUser} and book_id = ${req.body.book_id};
     `)
-              .then((switched) => {
-                res.sendStatus(200)
-              })
+              .then(switched => res.sendStatus(200))
               .catch((err) => { console.log('error inner', err); res.sendStatus(500) })
           })
           .catch((err) => { console.log(err); res.send(err).status(500) })
